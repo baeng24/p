@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페르수스 대표 - AI Designer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #fe647c;
+            --secondary: #9333ea;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* 스크롤 스냅 */
+        .scroll-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        
+        section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            padding: 80px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* 히어로 섹션 */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(254, 100, 124, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+        
+        .tagline {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(254, 100, 124, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(254, 100, 124, 0.1);
+        }
+        
+        /* 통계 섹션 */
+        .stats {
+            background: var(--dark-bg);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(254, 100, 124, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .stat-desc {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-top: 1rem;
+        }
+        
+        /* 프로젝트 섹션 */
+        .projects {
+            background: var(--dark-bg);
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 40px rgba(254, 100, 124, 0.2);
+        }
+        
+        .project-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #000;
+            font-size: 1rem;
+            font-weight: 900;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-role {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card ul {
+            margin-left: 1.5rem;
+        }
+        
+        .project-card li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 스킬 섹션 */
+        .skills {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(254, 100, 124, 0.2);
+        }
+        
+        .skill-category {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+        
+        .skill-items {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* 연락 섹션 */
+        .contact {
+            background: var(--dark-bg);
+        }
+        
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(254, 100, 124, 0.2);
+        }
+        
+        .contact-label {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-value {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        
+        /* 애니메이션 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 20px;
+            }
+            
+            .stats-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 스크롤 인디케이터 */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            z-index: 100;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        @keyframes scroll {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-container">
+        <!-- 히어로 섹션 -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>페르수스 대표</h1>
+                    <div class="subtitle">AI-POWERED BRAND VISUAL DIRECTOR</div>
+                    <div class="tagline">15년 브랜딩 내공 × AI 도구 = 폭발적 시너지</div>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">주요 프로젝트 보기</a>
+                        <a href="#contact" class="btn btn-secondary">연락하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator"></div>
+        </section>
+        
+        <!-- 통계 섹션 -->
+        <section class="stats" id="stats">
+            <div class="container">
+                <h2 class="section-title">임팩트로 증명된 역량</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">시민 인지도</div>
+                        <div class="stat-desc">부산바다위 브랜드 런칭 후 달성</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">뷰티 브랜드</div>
+                        <div class="stat-desc">패키징 & BI 시스템 구축</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3×</div>
+                        <div class="stat-label">AI 효율화</div>
+                        <div class="stat-desc">컨셉 프로토타이핑 속도 3배 향상</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15년</div>
+                        <div class="stat-label">브랜드 디자인</div>
+                        <div class="stat-desc">차장급 시니어 디렉터</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 프로젝트 섹션 -->
+        <section class="projects" id="projects">
+            <div class="container">
+                <h2 class="section-title">주요 프로젝트</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <span class="project-number">01</span>
+                        <h3 class="project-title">부산해양관광교통 '부산바다위'</h3>
+                        <div class="project-role">Lead Brand Designer · 2023</div>
+                        <ul>
+                            <li><strong style="color: #fe647c;">다수 경쟁 시안 중 최종 선정</strong> — 네이밍부터 매뉴얼까지 End-to-End 실행</li>
+                            <li>120페이지 브랜드 가이드라인 완성, 확장 가능한 시스템 설계</li>
+                            <li>Vehicle Graphics, Signage, Digital 전 접점 Application 구축</li>
+                            <li>부산시 대표 해양 모빌리티 브랜드로 안착, 시민 인지도 85%+ 달성</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card">
+                        <span class="project-number">02</span>
+                        <h3 class="project-title">캠페인 브랜드 '부산은 스포츠다'</h3>
+                        <div class="project-role">Brand Strategy & Visual Director · 2022</div>
+                        <ul>
+                            <li>추상적 가치('스포츠 정신')를 시각 자산으로 전환</li>
+                            <li>Verbal Identity부터 Visual System까지 통합 설계</li>
+                            <li>옥외광고, 디지털 콘텐츠, 이벤트 머티리얼 전개</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card">
+                        <span class="project-number">03</span>
+                        <h3 class="project-title">Cosmetic Packaging & BI</h3>
+                        <div class="project-role">Brand Designer & Art Director · 2015~2023</div>
+                        <ul>
+                            <li>10+ 뷰티 브랜드 패키징 시스템 설계 (라인 확장 구조)</li>
+                            <li>제조·마케팅·디자인 부서 간 협업 중재</li>
+                            <li>백화점 입점 성공, SNS 바이럴 2만+ 저장 등 성과 달성</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 스킬 섹션 -->
+        <section class="skills" id="skills">
+            <div class="container">
+                <h2 class="section-title">Technical Stack</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-category">Classic Tools</div>
+                        <div class="skill-items">
+                            Adobe CC Suite (Photoshop, Illustrator, InDesign, After Effects)<br/>
+                            Figma (UI/UX 프로토타이핑 및 협업 도구)
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <div class="skill-category">AI Integration</div>
+                        <div class="skill-items">
+                            Midjourney (컨셉 비주얼 프로토타이핑)<br/>
+                            Stable Diffusion (커스텀 스타일 학습 및 생성)<br/>
+                            ChatGPT (프롬프트 엔지니어링)
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <div class="skill-category">Workflow Innovation</div>
+                        <div class="skill-items">
+                            <strong style="color: #fe647c;">15년 심미안 + AI 속도 = 프로토타이핑 3배 가속화</strong><br/>
+                            • 과거: 무드보드 제작 3주 소요<br/>
+                            • 현재: AI로 3일 내 수십 개 방향성 도출 → 큐레이션 → 정제<br/>
+                            • 결과: 피드백 사이클 단축, 더 많은 옵션 제시
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <div class="skill-category">Design Philosophy</div>
+                        <div class="skill-items">
+                            <strong style="color: #fff;">"숨겨진 본질을 드러내는 디자인"</strong><br/>
+                            브랜드 페르소나 추출 → IP 세계관으로 번역<br/>
+                            시스템 사고로 확장 가능한 구조 설계
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 연락 섹션 -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="section-title">Let's Create Together</h2>
+                    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-top: 1rem;">
+                        브랜드를 만들듯, 세계를 짓겠습니다.<br/>
+                        트리노드 AI Designer 포지션에 지원합니다.
+                    </p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-label">Position</div>
+                            <div class="contact-value">AI Designer / UIUX셀</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-label">Experience</div>
+                            <div class="contact-value">15년 차 차장</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">persus.design@email.com</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 3rem;">
+                        <a href="#" class="btn btn-primary" style="margin-right: 1rem;">이력서 다운로드</a>
+                        <a href="#" class="btn btn-secondary">경력기술서 다운로드</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // 스크롤 인디케이터 숨기기
+        window.addEventListener('scroll', () => {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (window.scrollY > 100) {
+                indicator.style.opacity = '0';
+            } else {
+                indicator.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>
