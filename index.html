@@ -1,594 +1,1960 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>페르수스 대표 - AI Designer Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary: #fe647c;
-            --secondary: #9333ea;
-            --dark-bg: #0a0a0a;
-            --card-bg: #141414;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* 스크롤 스냅 */
-        .scroll-container {
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            height: 100vh;
-        }
-        
-        section {
-            min-height: 100vh;
-            scroll-snap-align: start;
-            padding: 80px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        /* 히어로 섹션 */
-        .hero {
-            position: relative;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 60%;
-            height: 200%;
-            background: linear-gradient(135deg, rgba(254, 100, 124, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-        
-        .subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--text-secondary);
-            letter-spacing: 0.15em;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s backwards;
-        }
-        
-        .tagline {
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s backwards;
-        }
-        
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: #000;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(254, 100, 124, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(254, 100, 124, 0.1);
-        }
-        
-        /* 통계 섹션 */
-        .stats {
-            background: var(--dark-bg);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(254, 100, 124, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        .stat-desc {
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            margin-top: 1rem;
-        }
-        
-        /* 프로젝트 섹션 */
-        .projects {
-            background: var(--dark-bg);
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-        }
-        
-        .projects-grid {
-            display: grid;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .project-card {
-            background: var(--card-bg);
-            border-left: 4px solid var(--primary);
-            padding: 2rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 40px rgba(254, 100, 124, 0.2);
-        }
-        
-        .project-number {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: #000;
-            font-size: 1rem;
-            font-weight: 900;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-        
-        .project-title {
-            font-size: 1.8rem;
-            color: #fff;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-role {
-            font-size: 0.9rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 1rem;
-        }
-        
-        .project-card ul {
-            margin-left: 1.5rem;
-        }
-        
-        .project-card li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* 스킬 섹션 */
-        .skills {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .skill-card {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(254, 100, 124, 0.2);
-        }
-        
-        .skill-category {
-            font-size: 1rem;
-            color: var(--primary);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-        }
-        
-        .skill-items {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        
-        /* 연락 섹션 */
-        .contact {
-            background: var(--dark-bg);
-        }
-        
-        .contact-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .contact-item {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(254, 100, 124, 0.2);
-        }
-        
-        .contact-label {
-            font-size: 0.9rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-        
-        .contact-value {
-            font-size: 1.1rem;
-            color: #fff;
-        }
-        
-        /* 애니메이션 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* 반응형 */
-        @media (max-width: 768px) {
-            section {
-                padding: 60px 20px;
-            }
-            
-            .stats-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* 스크롤 인디케이터 */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 50px;
-            border: 2px solid var(--primary);
-            border-radius: 20px;
-            z-index: 100;
-            animation: bounce 2s infinite;
-        }
-        
-        .scroll-indicator::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: scroll 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-        
-        @keyframes scroll {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배수현 이력서 · 트리노드 UIUX셀 AI 디자이너 지원</title>
+<meta name="description" content="15년 브랜딩 내공 + AI 워크플로우. 트리노드가 찾던 바로 그 디자이너, 배수현입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Pretendard:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+/* ===== THEME VARIABLES ===== */
+:root[data-theme="light"]{
+  --bg:#fcfbf7;
+  --bg-alt:#f4f1e8;
+  --bg-card:#ffffff;
+  --bg-sub:#f8f5ec;
+  --text:#1a1f1a;
+  --text-sub:#4a524a;
+  --text-dim:#8a918a;
+  --text-faint:rgba(26,31,26,0.25);
+  --green:#2d8659;
+  --green-bright:#3aa36d;
+  --green-deep:#1e5c3d;
+  --green-soft:#e8f3ec;
+  --peach:#f5e6d3;
+  --line:rgba(26,31,26,0.08);
+  --line-bold:rgba(26,31,26,0.18);
+  --shadow:0 4px 24px rgba(26,31,26,0.06);
+  --shadow-lg:0 12px 48px rgba(26,31,26,0.1);
+}
+:root[data-theme="dark"]{
+  --bg:#0f1410;
+  --bg-alt:#161c17;
+  --bg-card:#1a211c;
+  --bg-sub:#13181400;
+  --text:#f0ede3;
+  --text-sub:#b8bcb3;
+  --text-dim:#787c73;
+  --text-faint:rgba(240,237,227,0.2);
+  --green:#4ab380;
+  --green-bright:#5dc796;
+  --green-deep:#2d8659;
+  --green-soft:rgba(74,179,128,0.1);
+  --peach:#2a2620;
+  --line:rgba(240,237,227,0.08);
+  --line-bold:rgba(240,237,227,0.2);
+  --shadow:0 4px 24px rgba(0,0,0,0.3);
+  --shadow-lg:0 12px 48px rgba(0,0,0,0.5);
+}
+
+:root{
+  --ff-display:'Gowun Batang',serif;
+  --ff-body:'Pretendard','Gowun Dodum',sans-serif;
+  --ff-mono:'Space Mono',monospace;
+  --ff-hero:'Bebas Neue',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--ff-body);
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+  transition:background 0.4s ease,color 0.4s ease;
+  line-height:1.7;
+  font-weight:400;
+}
+a{color:inherit;text-decoration:none}
+button{cursor:none;background:none;border:none;color:inherit;font-family:inherit}
+
+/* ===== CUSTOM CURSOR - RABBIT ===== */
+.cursor-rabbit{
+  position:fixed;width:48px;height:48px;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.08s ease-out,width 0.25s,height 0.25s;
+  will-change:transform;
+}
+.cursor-rabbit svg{width:100%;height:100%;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15))}
+.cursor-dot{
+  position:fixed;width:6px;height:6px;
+  background:var(--green);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width 0.2s,height 0.2s,background 0.2s;
+}
+.cursor-rabbit.hover{transform:translate(-50%,-50%) scale(1.2) rotate(-8deg)}
+
+/* Click burst */
+.click-burst{
+  position:fixed;pointer-events:none;z-index:9997;
+  width:60px;height:60px;transform:translate(-50%,-50%);
+}
+.click-burst span{
+  position:absolute;top:50%;left:50%;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--green);
+  animation:burst 0.6s ease-out forwards;
+}
+.click-burst span:nth-child(1){--a:0deg}
+.click-burst span:nth-child(2){--a:60deg}
+.click-burst span:nth-child(3){--a:120deg}
+.click-burst span:nth-child(4){--a:180deg}
+.click-burst span:nth-child(5){--a:240deg}
+.click-burst span:nth-child(6){--a:300deg}
+@keyframes burst{
+  0%{transform:rotate(var(--a)) translateY(0) scale(1);opacity:1}
+  100%{transform:rotate(var(--a)) translateY(30px) scale(0);opacity:0}
+}
+
+/* ===== NAVIGATION ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:0 40px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+  transition:background 0.4s;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--ff-display);
+  font-size:1.35rem;font-weight:700;
+  letter-spacing:-0.02em;
+}
+.nav-logo-mark{
+  width:36px;height:36px;
+  background:var(--green);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.05em;
+}
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center}
+.nav-links a{
+  font-size:0.85rem;font-weight:500;
+  color:var(--text-sub);
+  padding:8px 16px;border-radius:8px;
+  transition:all 0.2s;
+  position:relative;
+}
+.nav-links a:hover{color:var(--green);background:var(--green-soft)}
+
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-tag{
+  font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;
+  color:var(--green);
+  background:var(--green-soft);
+  padding:6px 14px;border-radius:100px;
+  letter-spacing:0.05em;
+}
+.theme-toggle{
+  width:40px;height:40px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.theme-toggle:hover{border-color:var(--green);color:var(--green);transform:rotate(20deg)}
+.theme-toggle svg{width:18px;height:18px}
+[data-theme="light"] .theme-toggle .moon{display:block}
+[data-theme="light"] .theme-toggle .sun{display:none}
+[data-theme="dark"] .theme-toggle .moon{display:none}
+[data-theme="dark"] .theme-toggle .sun{display:block}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  padding:120px 40px 60px;
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 20% 30%,var(--green-soft) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 70%,var(--peach) 0%,transparent 60%);
+  opacity:0.6;
+}
+[data-theme="dark"] .hero-bg{opacity:0.4}
+
+.hero-grain{
+  position:absolute;inset:0;pointer-events:none;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-inner{
+  max-width:1400px;margin:0 auto;
+  display:grid;grid-template-columns:1.3fr 1fr;
+  gap:80px;align-items:center;
+  position:relative;z-index:2;
+  width:100%;
+}
+
+.hero-left{}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--green-soft);
+  color:var(--green-deep);
+  padding:8px 16px;border-radius:100px;
+  font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.05em;margin-bottom:32px;
+}
+.hero-badge-dot{
+  width:6px;height:6px;background:var(--green);
+  border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(1.3)}
+}
+[data-theme="dark"] .hero-badge{color:var(--green-bright)}
+
+.hero-title{
+  font-family:var(--ff-display);
+  font-size:clamp(3rem,6.5vw,6rem);
+  line-height:1.05;
+  font-weight:700;
+  letter-spacing:-0.03em;
+  color:var(--text);
+  margin-bottom:24px;
+}
+.hero-title-highlight{
+  color:var(--green);
+  position:relative;
+  display:inline-block;
+}
+.hero-title-highlight::after{
+  content:'';position:absolute;
+  bottom:6px;left:-2px;right:-2px;height:14px;
+  background:var(--green-soft);
+  z-index:-1;border-radius:4px;
+}
+
+.hero-name-row{
+  display:flex;align-items:baseline;gap:20px;
+  margin-bottom:40px;flex-wrap:wrap;
+}
+.hero-name{
+  font-family:var(--ff-display);
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:700;letter-spacing:-0.02em;
+  color:var(--text);
+}
+.hero-name-en{
+  font-family:var(--ff-mono);font-size:0.85rem;
+  color:var(--text-dim);letter-spacing:0.15em;
+}
+
+.hero-tagline{
+  font-size:1.08rem;
+  line-height:2;
+  color:var(--text-sub);
+  max-width:560px;
+  margin-bottom:48px;
+}
+.hero-tagline strong{color:var(--text);font-weight:700}
+.hero-tagline .accent{color:var(--green);font-weight:700}
+
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;border-radius:12px;
+  font-size:0.92rem;font-weight:600;
+  transition:all 0.2s;
+}
+.btn-primary{
+  background:var(--green);color:#fff;
+}
+.btn-primary:hover{background:var(--green-deep);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--line-bold);
+}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
+
+/* Hero Right - Rabbit + Stats */
+.hero-right{
+  display:flex;flex-direction:column;gap:20px;
+}
+.hero-rabbit-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:32px;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  overflow:hidden;
+}
+.hero-rabbit-card::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:140px;height:140px;border-radius:50%;
+  background:var(--green-soft);
+}
+.rabbit-illust{
+  width:100%;height:160px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.rabbit-illust svg{width:120px;height:120px}
+
+.rabbit-msg{
+  background:var(--bg);
+  border:1px dashed var(--line-bold);
+  border-radius:16px;
+  padding:18px 20px;
+  margin-top:8px;
+  position:relative;
+}
+.rabbit-msg::before{
+  content:'';position:absolute;top:-8px;left:32px;
+  width:14px;height:14px;
+  background:var(--bg);
+  border-top:1px dashed var(--line-bold);
+  border-left:1px dashed var(--line-bold);
+  transform:rotate(45deg);
+}
+.rabbit-msg-label{
+  font-family:var(--ff-mono);font-size:0.6rem;
+  color:var(--green);letter-spacing:0.12em;
+  margin-bottom:6px;font-weight:700;
+}
+.rabbit-msg-text{
+  font-size:0.88rem;color:var(--text);font-weight:500;line-height:1.6;
+}
+
+.hero-meta-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--line);
+  overflow:hidden;
+}
+.hero-meta-item{
+  background:var(--bg-card);
+  padding:16px;
+}
+.hero-meta-label{
+  font-family:var(--ff-mono);font-size:0.58rem;
+  color:var(--text-dim);letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:6px;
+}
+.hero-meta-value{
+  font-size:1.15rem;font-weight:700;color:var(--text);
+  font-family:var(--ff-display);
+}
+.hero-meta-value .g{color:var(--green)}
+
+/* ===== CLAUDE CREDIT BANNER ===== */
+.claude-banner{
+  background:var(--bg-alt);
+  padding:20px 40px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-size:0.82rem;color:var(--text-sub);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.claude-banner strong{color:var(--green);font-weight:700}
+.claude-banner-icon{
+  width:24px;height:24px;
+  background:var(--green);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.65rem;font-weight:700;
+  font-family:var(--ff-mono);
+}
+
+/* ===== SECTION COMMON ===== */
+.section{
+  padding:120px 40px;
+  max-width:1400px;margin:0 auto;
+  position:relative;
+}
+.section-alt{background:var(--bg-alt)}
+.section-alt-wrap{background:var(--bg-alt);padding:0}
+
+.s-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;
+  color:var(--green);letter-spacing:0.15em;
+  text-transform:uppercase;margin-bottom:20px;
+  background:var(--green-soft);
+  padding:8px 14px;border-radius:100px;
+}
+.s-label-num{
+  font-family:var(--ff-mono);font-size:0.65rem;
+  color:var(--green-deep);font-weight:700;
+}
+[data-theme="dark"] .s-label-num{color:var(--green-bright)}
+
+.s-title{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,4.5vw,3.5rem);
+  font-weight:700;
+  line-height:1.2;letter-spacing:-0.02em;
+  color:var(--text);margin-bottom:20px;
+}
+.s-title em{color:var(--green);font-style:normal}
+.s-sub{
+  font-size:1.05rem;color:var(--text-sub);
+  max-width:720px;line-height:1.9;margin-bottom:56px;
+}
+
+/* ===== MATCH SECTION - 트리노드 인재상 매칭 ===== */
+.match-header{text-align:center;margin-bottom:80px}
+.match-title{
+  font-family:var(--ff-display);
+  font-size:clamp(2rem,4.5vw,3.5rem);
+  font-weight:700;line-height:1.3;
+  margin-bottom:20px;
+  letter-spacing:-0.02em;
+}
+.match-title em{color:var(--green);font-style:normal;position:relative;display:inline-block}
+.match-title em::after{
+  content:'';position:absolute;
+  left:0;right:0;bottom:2px;height:10px;
+  background:var(--green-soft);z-index:-1;
+}
+.match-sub{
+  font-size:1rem;color:var(--text-sub);
+  max-width:620px;margin:0 auto;line-height:1.9;
+}
+
+.match-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:24px;
+}
+.match-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:36px 32px;
+  transition:all 0.3s;
+  position:relative;overflow:hidden;
+}
+.match-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--green);
+  box-shadow:var(--shadow-lg);
+}
+.match-card::before{
+  content:'';position:absolute;top:0;left:0;
+  width:100%;height:4px;background:var(--green);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;
+}
+.match-card:hover::before{transform:scaleX(1)}
+
+.match-card-head{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:24px;
+}
+.match-icon{
+  width:64px;height:64px;
+  background:var(--green-soft);
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.match-icon svg{width:36px;height:36px}
+.match-quote{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.15rem;line-height:1.5;color:var(--text);
+}
+.match-quote em{color:var(--green);font-style:normal}
+
+.match-evidence{
+  background:var(--bg);
+  border-left:3px solid var(--green);
+  padding:18px 22px;border-radius:8px;
+  margin-bottom:18px;
+}
+.match-evidence-label{
+  font-family:var(--ff-mono);font-size:0.6rem;
+  color:var(--green-deep);font-weight:700;
+  letter-spacing:0.12em;margin-bottom:8px;
+  text-transform:uppercase;
+}
+[data-theme="dark"] .match-evidence-label{color:var(--green-bright)}
+.match-evidence-text{
+  font-size:0.93rem;color:var(--text);font-weight:500;
+  line-height:1.75;
+}
+.match-evidence-text strong{color:var(--green);font-weight:700}
+
+.match-detail{
+  font-size:0.87rem;color:var(--text-sub);
+  line-height:1.85;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.1fr;
+  gap:80px;align-items:start;
+}
+.about-body p{
+  font-size:0.98rem;line-height:2;
+  color:var(--text-sub);
+  margin-bottom:28px;
+}
+.about-body strong{color:var(--text);font-weight:700}
+.about-body .hl{color:var(--green);font-weight:700}
+
+.career-timeline{display:flex;flex-direction:column;gap:0}
+.career-item{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px 28px;
+  margin-bottom:12px;
+  position:relative;
+  transition:all 0.25s;
+}
+.career-item:hover{
+  border-color:var(--green);
+  transform:translateX(4px);
+  box-shadow:var(--shadow);
+}
+.career-item::before{
+  content:'';position:absolute;left:-7px;top:32px;
+  width:12px;height:12px;
+  background:var(--green);
+  border:3px solid var(--bg);
+  border-radius:50%;
+}
+.career-period{
+  font-family:var(--ff-mono);font-size:0.68rem;
+  color:var(--green);font-weight:700;
+  letter-spacing:0.05em;margin-bottom:6px;
+}
+.career-title{
+  font-size:1.02rem;font-weight:700;
+  color:var(--text);margin-bottom:4px;
+}
+.career-role{
+  font-family:var(--ff-mono);font-size:0.65rem;
+  color:var(--text-dim);letter-spacing:0.08em;
+  text-transform:uppercase;margin-bottom:12px;
+}
+.career-desc{
+  font-size:0.87rem;color:var(--text-sub);
+  line-height:1.75;
+}
+
+/* ===== IMPACT NUMBERS ===== */
+.impact-wrap{background:var(--bg-alt)}
+.impact-grid{
+  max-width:1400px;margin:0 auto;
+  padding:80px 40px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+.impact-cell{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:36px 28px;
+  transition:all 0.3s;
+  position:relative;overflow:hidden;
+}
+.impact-cell:hover{
+  border-color:var(--green);
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+.impact-cell::after{
+  content:'';position:absolute;top:20px;right:20px;
+  width:40px;height:40px;
+  background:var(--green-soft);border-radius:50%;
+  opacity:0.5;
+}
+.impact-sub{
+  font-family:var(--ff-mono);font-size:0.62rem;
+  letter-spacing:0.12em;color:var(--text-dim);
+  text-transform:uppercase;margin-bottom:12px;
+  font-weight:700;
+}
+.impact-num{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:3.5rem;line-height:1;
+  color:var(--text);margin-bottom:14px;
+  letter-spacing:-0.03em;
+}
+.impact-num span{color:var(--green)}
+.impact-desc{
+  font-size:0.85rem;color:var(--text-sub);
+  line-height:1.7;
+}
+
+/* ===== PROJECTS ===== */
+.proj-grid{
+  display:grid;grid-template-columns:1fr;gap:24px;
+}
+.proj-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  transition:all 0.3s;
+  display:grid;grid-template-columns:1fr 1.2fr;
+}
+.proj-card:nth-child(even){grid-template-columns:1.2fr 1fr}
+.proj-card:nth-child(even) .proj-image{order:2}
+.proj-card:nth-child(even) .proj-content{order:1}
+.proj-card:hover{
+  border-color:var(--green);
+  box-shadow:var(--shadow-lg);
+}
+
+.proj-image{
+  background:var(--bg-alt);
+  min-height:320px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.proj-image-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;
+  background:
+    linear-gradient(135deg,var(--green-soft) 0%,var(--peach) 100%);
+  color:var(--green-deep);
+}
+[data-theme="dark"] .proj-image-placeholder{color:var(--green-bright)}
+.proj-image-placeholder svg{width:48px;height:48px;opacity:0.6}
+.proj-image-placeholder span{
+  font-family:var(--ff-mono);font-size:0.68rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  font-weight:700;
+}
+
+.proj-content{
+  padding:40px 36px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.proj-meta{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:16px;
+}
+.proj-num{
+  font-family:var(--ff-mono);font-size:0.72rem;
+  background:var(--green);color:#fff;
+  padding:4px 10px;border-radius:6px;
+  font-weight:700;letter-spacing:0.05em;
+}
+.proj-year{
+  font-family:var(--ff-mono);font-size:0.72rem;
+  color:var(--text-dim);letter-spacing:0.1em;
+  font-weight:700;
+}
+.proj-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.5rem;line-height:1.35;
+  color:var(--text);margin-bottom:10px;
+  letter-spacing:-0.02em;
+}
+.proj-role{
+  font-family:var(--ff-mono);font-size:0.68rem;
+  color:var(--green);letter-spacing:0.08em;
+  font-weight:700;margin-bottom:18px;
+  text-transform:uppercase;
+}
+.proj-desc{
+  font-size:0.9rem;color:var(--text-sub);
+  line-height:1.85;margin-bottom:20px;
+}
+.proj-tags{display:flex;flex-wrap:wrap;gap:8px}
+.proj-tag{
+  font-family:var(--ff-mono);font-size:0.62rem;
+  padding:5px 12px;border-radius:6px;
+  background:var(--bg);
+  color:var(--text-sub);
+  border:1px solid var(--line);
+  letter-spacing:0.05em;font-weight:500;
+}
+
+/* ===== AI WORKFLOW - REDESIGNED ===== */
+.ai-section{position:relative}
+.ai-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:end;margin-bottom:80px;
+}
+.ai-intro{
+  font-size:1.02rem;line-height:2;
+  color:var(--text-sub);
+}
+.ai-intro strong{color:var(--text);font-weight:700}
+
+/* ToolStack - Pills with depth */
+.tool-stack{
+  margin-bottom:80px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:48px;
+}
+.tool-stack-label{
+  font-family:var(--ff-mono);font-size:0.68rem;
+  color:var(--green);font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.tool-stack-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.8rem;line-height:1.4;
+  color:var(--text);margin-bottom:32px;
+  letter-spacing:-0.02em;
+}
+.tool-stack-title em{color:var(--green);font-style:normal}
+.tool-pills{display:flex;flex-wrap:wrap;gap:10px}
+.tool-pill{
+  padding:10px 18px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:100px;
+  font-size:0.85rem;font-weight:600;
+  color:var(--text);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;
+}
+.tool-pill:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.tool-pill-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+}
+
+.ai-workflow-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+.ai-block{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:32px 28px;
+  transition:all 0.25s;
+  display:flex;flex-direction:column;
+}
+.ai-block:hover{
+  border-color:var(--green);
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+}
+.ai-block-num{
+  font-family:var(--ff-mono);font-size:0.65rem;
+  color:var(--green);letter-spacing:0.12em;
+  font-weight:700;margin-bottom:12px;
+}
+.ai-block-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.15rem;line-height:1.4;
+  color:var(--text);margin-bottom:16px;
+  letter-spacing:-0.01em;
+}
+.ai-block-desc{
+  font-size:0.88rem;color:var(--text-sub);
+  line-height:1.85;
+}
+.ai-block-desc strong{color:var(--text);font-weight:700}
+
+/* BEFORE / AFTER - Redesigned */
+.transform-section{
+  margin-top:80px;
+  background:linear-gradient(135deg,var(--green-soft) 0%,var(--peach) 100%);
+  border-radius:32px;
+  padding:56px 48px;
+  position:relative;overflow:hidden;
+}
+[data-theme="dark"] .transform-section{
+  background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-alt) 100%);
+  border:1px solid var(--line);
+}
+.transform-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.8rem;color:var(--text);
+  margin-bottom:40px;letter-spacing:-0.02em;
+  text-align:center;
+}
+.transform-title em{color:var(--green);font-style:normal}
+.transform-grid{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:32px;align-items:center;
+}
+.transform-col{
+  background:var(--bg-card);
+  border-radius:20px;padding:32px;
+  border:1px solid var(--line);
+}
+.transform-col.after{
+  border:2px solid var(--green);
+  background:var(--bg-card);
+}
+.transform-label{
+  display:inline-block;
+  font-family:var(--ff-mono);font-size:0.6rem;font-weight:700;
+  padding:4px 12px;border-radius:6px;
+  margin-bottom:20px;
+  letter-spacing:0.12em;
+}
+.transform-col:not(.after) .transform-label{
+  background:var(--text-dim);color:var(--bg);
+}
+.transform-col.after .transform-label{
+  background:var(--green);color:#fff;
+}
+.transform-items{display:flex;flex-direction:column;gap:14px}
+.transform-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:0.88rem;line-height:1.6;
+  color:var(--text-sub);
+}
+.transform-col.after .transform-item{color:var(--text);font-weight:500}
+.transform-item::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--text-dim);margin-top:8px;flex-shrink:0;
+}
+.transform-col.after .transform-item::before{background:var(--green)}
+.transform-arrow{
+  font-size:2rem;color:var(--green);
+  font-family:var(--ff-display);font-weight:700;
+}
+
+/* ===== EDU + PROFILE ===== */
+.edu-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:24px;
+}
+.edu-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:32px 28px;
+  transition:all 0.25s;
+}
+.edu-card:hover{
+  border-color:var(--green);
+  box-shadow:var(--shadow);
+}
+.edu-badge{
+  display:inline-block;
+  font-family:var(--ff-mono);font-size:0.6rem;font-weight:700;
+  background:var(--green-soft);
+  color:var(--green-deep);
+  padding:5px 12px;border-radius:6px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+[data-theme="dark"] .edu-badge{color:var(--green-bright)}
+.edu-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.1rem;color:var(--text);
+  margin-bottom:8px;letter-spacing:-0.01em;
+}
+.edu-period{
+  font-family:var(--ff-mono);font-size:0.68rem;
+  color:var(--text-dim);letter-spacing:0.05em;
+  margin-bottom:14px;
+}
+.edu-detail{
+  font-size:0.87rem;color:var(--text-sub);
+  line-height:1.8;
+}
+.edu-detail span{display:block}
+
+.edu-sub-item{
+  padding-top:20px;margin-top:20px;
+  border-top:1px dashed var(--line);
+}
+.edu-sub-item:first-child{padding-top:0;margin-top:0;border-top:none}
+.edu-sub-label{
+  font-family:var(--ff-mono);font-size:0.6rem;
+  color:var(--green);letter-spacing:0.1em;
+  font-weight:700;margin-bottom:6px;
+  text-transform:uppercase;
+}
+
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.skill-tag{
+  font-family:var(--ff-mono);font-size:0.65rem;
+  padding:4px 10px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:6px;
+  color:var(--text-sub);
+  transition:all 0.2s;font-weight:500;
+}
+.skill-tag:hover{border-color:var(--green);color:var(--green)}
+
+.profile-info{
+  display:flex;flex-direction:column;gap:0;
+  border-top:1px solid var(--line);
+}
+.profile-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--line);
+  font-size:0.87rem;
+}
+.profile-key{
+  font-family:var(--ff-mono);font-size:0.65rem;
+  color:var(--text-dim);letter-spacing:0.08em;
+  font-weight:700;text-transform:uppercase;
+}
+.profile-val{
+  font-weight:700;color:var(--text);
+}
+
+/* ===== CONTACT ===== */
+.contact-section{
+  background:var(--text);
+  color:var(--bg);
+  padding:120px 40px 60px;
+  position:relative;overflow:hidden;
+}
+.contact-inner{max-width:1400px;margin:0 auto;position:relative;z-index:2}
+.contact-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 20%,rgba(45,134,89,0.15) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+.contact-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;
+  color:var(--green-bright);
+  background:rgba(74,179,128,0.15);
+  padding:8px 14px;border-radius:100px;
+  letter-spacing:0.15em;margin-bottom:24px;
+  text-transform:uppercase;
+}
+
+.contact-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:clamp(2.5rem,6vw,5rem);
+  line-height:1.1;color:var(--bg);
+  margin-bottom:60px;letter-spacing:-0.02em;
+}
+.contact-title em{color:var(--green-bright);font-style:normal}
+
+.contact-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;margin-bottom:60px;
+}
+.contact-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;
+  padding:28px 24px;
+  transition:all 0.25s;
+}
+.contact-card:hover{
+  background:rgba(74,179,128,0.1);
+  border-color:var(--green-bright);
+  transform:translateY(-3px);
+}
+.cc-label{
+  font-family:var(--ff-mono);font-size:0.62rem;
+  color:var(--green-bright);letter-spacing:0.12em;
+  font-weight:700;margin-bottom:14px;
+  text-transform:uppercase;
+}
+.cc-value{
+  font-size:1.02rem;font-weight:700;
+  color:var(--bg);line-height:1.4;
+}
+.cc-sub{
+  font-size:0.78rem;color:rgba(255,255,255,0.5);
+  margin-top:6px;
+}
+
+.contact-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:40px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  flex-wrap:wrap;gap:20px;
+}
+.contact-copy{
+  font-family:var(--ff-mono);font-size:0.72rem;
+  color:rgba(255,255,255,0.5);letter-spacing:0.05em;
+}
+.contact-end{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.1rem;color:var(--green-bright);
+  letter-spacing:0.02em;
+}
+
+/* ===== FAB - Floating Action Buttons ===== */
+.fab-group{
+  position:fixed;bottom:32px;right:32px;
+  z-index:300;
+  display:flex;flex-direction:column;gap:10px;
+}
+.fab{
+  background:var(--green);
+  color:#fff;
+  padding:12px 20px;
+  border-radius:100px;
+  font-size:0.82rem;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:var(--shadow-lg);
+  transition:all 0.25s;
+  white-space:nowrap;
+}
+.fab:hover{
+  background:var(--green-deep);
+  transform:translateY(-2px) scale(1.03);
+}
+.fab svg{width:14px;height:14px}
+.fab-top{
+  background:var(--bg-card);
+  color:var(--text);
+  border:1px solid var(--line);
+  padding:12px;
+  width:44px;height:44px;
+  border-radius:50%;
+  align-self:flex-end;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(20px);
+  pointer-events:none;
+}
+.fab-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.fab-top:hover{border-color:var(--green);color:var(--green)}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}
+.reveal-d2{transition-delay:0.2s}
+.reveal-d3{transition-delay:0.3s}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:48px}
+  .about-grid,.ai-header,.transform-grid{grid-template-columns:1fr}
+  .transform-arrow{transform:rotate(90deg);margin:0 auto}
+  .match-grid,.ai-workflow-grid{grid-template-columns:1fr}
+  .proj-card,.proj-card:nth-child(even){grid-template-columns:1fr}
+  .proj-card:nth-child(even) .proj-image{order:0}
+  .proj-card:nth-child(even) .proj-content{order:0}
+  .impact-grid,.contact-grid{grid-template-columns:repeat(2,1fr)}
+  .edu-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  body{cursor:auto}
+  .cursor-rabbit,.cursor-dot{display:none}
+  .section{padding:80px 24px}
+  .hero{padding:100px 24px 40px}
+  .nav{padding:0 20px}
+  .impact-grid{padding:60px 24px}
+  .contact-section{padding:80px 24px 40px}
+  .fab-group{bottom:20px;right:20px}
+  .fab{padding:10px 16px;font-size:0.76rem}
+}
+@media(max-width:640px){
+  .impact-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-meta-card{grid-template-columns:1fr}
+  .nav-tag{display:none}
+}
+
+/* Print styles */
+@media print{
+  .nav,.fab-group,.cursor-rabbit,.cursor-dot,.theme-toggle{display:none}
+  body{cursor:auto}
+  .section{page-break-inside:avoid}
+}
+</style>
 </head>
 <body>
-    <div class="scroll-container">
-        <!-- 히어로 섹션 -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>페르수스 대표</h1>
-                    <div class="subtitle">AI-POWERED BRAND VISUAL DIRECTOR</div>
-                    <div class="tagline">15년 브랜딩 내공 × AI 도구 = 폭발적 시너지</div>
-                    <div class="cta-buttons">
-                        <a href="#projects" class="btn btn-primary">주요 프로젝트 보기</a>
-                        <a href="#contact" class="btn btn-secondary">연락하기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-indicator"></div>
-        </section>
-        
-        <!-- 통계 섹션 -->
-        <section class="stats" id="stats">
-            <div class="container">
-                <h2 class="section-title">임팩트로 증명된 역량</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">85%</div>
-                        <div class="stat-label">시민 인지도</div>
-                        <div class="stat-desc">부산바다위 브랜드 런칭 후 달성</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">뷰티 브랜드</div>
-                        <div class="stat-desc">패키징 & BI 시스템 구축</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3×</div>
-                        <div class="stat-label">AI 효율화</div>
-                        <div class="stat-desc">컨셉 프로토타이핑 속도 3배 향상</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">15년</div>
-                        <div class="stat-label">브랜드 디자인</div>
-                        <div class="stat-desc">차장급 시니어 디렉터</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 프로젝트 섹션 -->
-        <section class="projects" id="projects">
-            <div class="container">
-                <h2 class="section-title">주요 프로젝트</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <span class="project-number">01</span>
-                        <h3 class="project-title">부산해양관광교통 '부산바다위'</h3>
-                        <div class="project-role">Lead Brand Designer · 2023</div>
-                        <ul>
-                            <li><strong style="color: #fe647c;">다수 경쟁 시안 중 최종 선정</strong> — 네이밍부터 매뉴얼까지 End-to-End 실행</li>
-                            <li>120페이지 브랜드 가이드라인 완성, 확장 가능한 시스템 설계</li>
-                            <li>Vehicle Graphics, Signage, Digital 전 접점 Application 구축</li>
-                            <li>부산시 대표 해양 모빌리티 브랜드로 안착, 시민 인지도 85%+ 달성</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="project-card">
-                        <span class="project-number">02</span>
-                        <h3 class="project-title">캠페인 브랜드 '부산은 스포츠다'</h3>
-                        <div class="project-role">Brand Strategy & Visual Director · 2022</div>
-                        <ul>
-                            <li>추상적 가치('스포츠 정신')를 시각 자산으로 전환</li>
-                            <li>Verbal Identity부터 Visual System까지 통합 설계</li>
-                            <li>옥외광고, 디지털 콘텐츠, 이벤트 머티리얼 전개</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="project-card">
-                        <span class="project-number">03</span>
-                        <h3 class="project-title">Cosmetic Packaging & BI</h3>
-                        <div class="project-role">Brand Designer & Art Director · 2015~2023</div>
-                        <ul>
-                            <li>10+ 뷰티 브랜드 패키징 시스템 설계 (라인 확장 구조)</li>
-                            <li>제조·마케팅·디자인 부서 간 협업 중재</li>
-                            <li>백화점 입점 성공, SNS 바이럴 2만+ 저장 등 성과 달성</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 스킬 섹션 -->
-        <section class="skills" id="skills">
-            <div class="container">
-                <h2 class="section-title">Technical Stack</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <div class="skill-category">Classic Tools</div>
-                        <div class="skill-items">
-                            Adobe CC Suite (Photoshop, Illustrator, InDesign, After Effects)<br/>
-                            Figma (UI/UX 프로토타이핑 및 협업 도구)
-                        </div>
-                    </div>
-                    
-                    <div class="skill-card">
-                        <div class="skill-category">AI Integration</div>
-                        <div class="skill-items">
-                            Midjourney (컨셉 비주얼 프로토타이핑)<br/>
-                            Stable Diffusion (커스텀 스타일 학습 및 생성)<br/>
-                            ChatGPT (프롬프트 엔지니어링)
-                        </div>
-                    </div>
-                    
-                    <div class="skill-card">
-                        <div class="skill-category">Workflow Innovation</div>
-                        <div class="skill-items">
-                            <strong style="color: #fe647c;">15년 심미안 + AI 속도 = 프로토타이핑 3배 가속화</strong><br/>
-                            • 과거: 무드보드 제작 3주 소요<br/>
-                            • 현재: AI로 3일 내 수십 개 방향성 도출 → 큐레이션 → 정제<br/>
-                            • 결과: 피드백 사이클 단축, 더 많은 옵션 제시
-                        </div>
-                    </div>
-                    
-                    <div class="skill-card">
-                        <div class="skill-category">Design Philosophy</div>
-                        <div class="skill-items">
-                            <strong style="color: #fff;">"숨겨진 본질을 드러내는 디자인"</strong><br/>
-                            브랜드 페르소나 추출 → IP 세계관으로 번역<br/>
-                            시스템 사고로 확장 가능한 구조 설계
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 연락 섹션 -->
-        <section class="contact" id="contact">
-            <div class="container">
-                <div class="contact-content">
-                    <h2 class="section-title">Let's Create Together</h2>
-                    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-top: 1rem;">
-                        브랜드를 만들듯, 세계를 짓겠습니다.<br/>
-                        트리노드 AI Designer 포지션에 지원합니다.
-                    </p>
-                    
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-label">Position</div>
-                            <div class="contact-value">AI Designer / UIUX셀</div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-label">Experience</div>
-                            <div class="contact-value">15년 차 차장</div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-label">Email</div>
-                            <div class="contact-value">persus.design@email.com</div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 3rem;">
-                        <a href="#" class="btn btn-primary" style="margin-right: 1rem;">이력서 다운로드</a>
-                        <a href="#" class="btn btn-secondary">경력기술서 다운로드</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+
+<!-- CUSTOM RABBIT CURSOR -->
+<div class="cursor-rabbit" id="rabbit">
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <!-- 트리노드 스타일 핑크 토끼 -->
+    <ellipse cx="24" cy="32" rx="13" ry="12" fill="#e89c9c"/>
+    <ellipse cx="16" cy="15" rx="3.5" ry="8" fill="#e89c9c"/>
+    <ellipse cx="32" cy="15" rx="3.5" ry="8" fill="#e89c9c"/>
+    <ellipse cx="16" cy="16" rx="1.5" ry="5" fill="#f5b5b5"/>
+    <ellipse cx="32" cy="16" rx="1.5" ry="5" fill="#f5b5b5"/>
+    <!-- 얼굴 -->
+    <ellipse cx="24" cy="34" rx="8" ry="6" fill="#b86a5c"/>
+    <!-- 눈 -->
+    <circle cx="20" cy="28" r="2" fill="#fff"/>
+    <circle cx="28" cy="28" r="2" fill="#fff"/>
+    <circle cx="20.3" cy="28.3" r="1" fill="#1a1a1a"/>
+    <circle cx="28.3" cy="28.3" r="1" fill="#1a1a1a"/>
+    <!-- 입 -->
+    <path d="M22 36 Q24 38 26 36" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- 점박이 -->
+    <circle cx="20" cy="33" r="0.7" fill="#8a4030" opacity="0.6"/>
+    <circle cx="28" cy="33" r="0.7" fill="#8a4030" opacity="0.6"/>
+    <circle cx="24" cy="37" r="0.6" fill="#8a4030" opacity="0.6"/>
+  </svg>
+</div>
+<div class="cursor-dot" id="dot"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">BSH</div>
+    <span>배수현</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">홈</a></li>
+    <li><a href="#match">왜 나인가</a></li>
+    <li><a href="#about">자기소개</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#ai">AI 워크플로우</a></li>
+    <li><a href="#profile">경력사항</a></li>
+    <li><a href="#contact">연락처</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-tag">트리노드 UIUX셀 지원</span>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="테마 전환">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        TREENOD · UIUX CELL · AI DESIGNER · 2026
+      </div>
+      <h1 class="hero-title reveal reveal-d1">
+        15년의 안목과<br>
+        <span class="hero-title-highlight">AI의 속도</span>,<br>
+        트리노드가 찾던<br>한 사람.
+      </h1>
+      <div class="hero-name-row reveal reveal-d2">
+        <div class="hero-name">배수현</div>
+        <div class="hero-name-en">BAE SU HYUN · UIUX · AI Designer</div>
+      </div>
+      <p class="hero-tagline reveal reveal-d2">
+        <strong>AI와 역할을 나누고</strong>, 
+        <strong>팀 전체가 함께 성장하는 변화</strong>를 만드는 디자이너.<br>
+        <strong>15년의 브랜딩 내공</strong>과 <strong>10개 이상의 AI 툴</strong>을 실무 워크플로우에 활용한 경험으로, 
+        포코 IP 세계관 구축과 생산성 혁신에 기여하겠습니다.
+      </p>
+      <div class="hero-cta reveal reveal-d3">
+        <a href="#match" class="btn btn-primary">
+          왜 저를 뽑아야 하는가
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#projects" class="btn btn-ghost">프로젝트 보기</a>
+      </div>
     </div>
-    
-    <script>
-        // 부드러운 스크롤
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+
+    <div class="hero-right">
+      <div class="hero-rabbit-card reveal reveal-d2">
+        <div class="rabbit-illust">
+          <!-- 큰 핑크 토끼 일러스트 -->
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- 배경 원 -->
+            <circle cx="60" cy="60" r="56" fill="#d4e8d8" opacity="0.6"/>
+            <!-- 귀 -->
+            <ellipse cx="42" cy="32" rx="7" ry="18" fill="#e89c9c"/>
+            <ellipse cx="78" cy="32" rx="7" ry="18" fill="#e89c9c"/>
+            <ellipse cx="42" cy="34" rx="3" ry="12" fill="#f5b5b5"/>
+            <ellipse cx="78" cy="34" rx="3" ry="12" fill="#f5b5b5"/>
+            <!-- 몸 -->
+            <ellipse cx="60" cy="75" rx="32" ry="28" fill="#e89c9c"/>
+            <!-- 얼굴 -->
+            <ellipse cx="60" cy="78" rx="22" ry="16" fill="#b86a5c"/>
+            <!-- 눈 (안경) -->
+            <circle cx="50" cy="65" r="6" fill="#fff" stroke="#2d8659" stroke-width="2"/>
+            <circle cx="70" cy="65" r="6" fill="#fff" stroke="#2d8659" stroke-width="2"/>
+            <circle cx="50" cy="65" r="2.5" fill="#1a1a1a"/>
+            <circle cx="70" cy="65" r="2.5" fill="#1a1a1a"/>
+            <circle cx="50.5" cy="64" r="0.8" fill="#fff"/>
+            <circle cx="70.5" cy="64" r="0.8" fill="#fff"/>
+            <line x1="56" y1="65" x2="64" y2="65" stroke="#2d8659" stroke-width="2"/>
+            <!-- 입 (웃음) -->
+            <path d="M52 80 Q60 86 68 80" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- 이빨 -->
+            <rect x="58" y="82" width="2" height="3" fill="#fff"/>
+            <rect x="60" y="82" width="2" height="3" fill="#fff"/>
+            <!-- 점박이 -->
+            <circle cx="48" cy="74" r="1.2" fill="#8a4030" opacity="0.5"/>
+            <circle cx="72" cy="74" r="1.2" fill="#8a4030" opacity="0.5"/>
+            <circle cx="55" cy="85" r="1" fill="#8a4030" opacity="0.5"/>
+            <circle cx="65" cy="85" r="1" fill="#8a4030" opacity="0.5"/>
+            <!-- 반짝이 -->
+            <path d="M90 40 L92 44 L96 46 L92 48 L90 52 L88 48 L84 46 L88 44 Z" fill="#2d8659" opacity="0.4"/>
+            <path d="M25 70 L26 72 L28 73 L26 74 L25 76 L24 74 L22 73 L24 72 Z" fill="#2d8659" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="rabbit-msg">
+          <div class="rabbit-msg-label">FROM 트리노드의 가족이 되고 싶은 토끼</div>
+          <div class="rabbit-msg-text">"안녕하세요! 오늘은 배수현님을 소개하도록 할게요. 스크롤을 내리면 왜 배수현님이 트리노드가 찾던 분인지 알려드릴게요."</div>
+        </div>
+      </div>
+
+      <div class="hero-meta-card reveal reveal-d3">
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Experience</div>
+          <div class="hero-meta-value"><span class="g">15</span>년</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">AI Tools</div>
+          <div class="hero-meta-value"><span class="g">10</span>+</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Projects</div>
+          <div class="hero-meta-value"><span class="g">100</span>+</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Selection</div>
+          <div class="hero-meta-value"><span class="g">NO.1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLAUDE BANNER -->
+<div class="claude-banner">
+  <div class="claude-banner-icon">AI</div>
+  <div>이 웹 이력서는 <strong>Claude (Anthropic)</strong>와의 협업으로 제작되었습니다 · 기획부터 코딩, 배포까지 AI 워크플로우로 완성한 결과물입니다</div>
+</div>
+
+<!-- MATCH SECTION - 트리노드 인재상 4가지 직접 매칭 -->
+<section class="section" id="match">
+  <div class="match-header">
+    <div class="s-label reveal"><span class="s-label-num">01</span> · WHY BAE SU HYUN</div>
+    <h2 class="match-title reveal reveal-d1">
+      트리노드가 찾는 <em>바로 그 네 가지</em>,<br>
+      저는 이미 갖추고 있습니다.
+    </h2>
+    <p class="match-sub reveal reveal-d2">
+      채용 공고의 4가지 인재상에 하나하나 답하겠습니다.<br>
+      감이 아닌 근거로, 말이 아닌 결과로.
+    </p>
+  </div>
+
+  <div class="match-grid">
+    <!-- 매칭 1: AI와 함께 가능성 확장 -->
+    <div class="match-card reveal">
+      <div class="match-card-head">
+        <div class="match-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" fill="#2d8659" opacity="0.15"/>
+            <path d="M12 20 L18 26 L28 14" stroke="#2d8659" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="30" cy="10" r="3" fill="#2d8659"/>
+            <circle cx="10" cy="12" r="2" fill="#2d8659" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="match-quote">
+          "AI와 함께<br>내 일의 <em>가능성을 확장</em>하는 분"
+        </div>
+      </div>
+      <div class="match-evidence">
+        <div class="match-evidence-label">▸ 저의 증거</div>
+        <div class="match-evidence-text">
+          Midjourney·Claude·Gemini 등 <strong>10여 종 AI 툴</strong>을 
+          브랜딩 실무에 이식한 1인 스튜디오 운영 경험 보유. 
+          지금 보시는 이 <strong>웹 이력서 자체가 Claude와의 협업 결과물</strong>입니다.
+        </div>
+      </div>
+      <div class="match-detail">
+        단순히 AI를 '사용'하는 것이 아니라, 어떤 작업에서 AI에게 맡기면 빨라지고 
+        어떤 작업은 사람이 끝까지 가야 하는지 <strong>실전으로 체득</strong>했습니다. 
+        도구와 역할을 나누는 법 — 이게 AI 시대 디자이너의 핵심 역량입니다.
+      </div>
+    </div>
+
+    <!-- 매칭 2: 팀 전체가 성장하는 변화 -->
+    <div class="match-card reveal reveal-d1">
+      <div class="match-card-head">
+        <div class="match-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" fill="#2d8659" opacity="0.15"/>
+            <circle cx="14" cy="16" r="4" fill="#2d8659"/>
+            <circle cx="26" cy="16" r="4" fill="#2d8659" opacity="0.7"/>
+            <circle cx="20" cy="26" r="4" fill="#2d8659" opacity="0.5"/>
+            <path d="M14 20 L20 23 M26 20 L20 23" stroke="#2d8659" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="match-quote">
+          "나를 통해 팀 전체가 함께<br><em>성장하는 변화</em>를 즐기는 분"
+        </div>
+      </div>
+      <div class="match-evidence">
+        <div class="match-evidence-label">▸ 저의 증거</div>
+        <div class="match-evidence-text">
+          부산 최상위 에이전시 '돋음' <strong>브랜드팀 차장</strong>이제 제가 체득한 AI 워크플로우를 팀의 자산으로 내재화하여, 동료들과 함께 압도적인 퍼포먼스를 만드는
+          <strong>성장 촉매제</strong>가 되고 싶습니다.
+        </div>
+      </div>
+      <div class="match-detail">
+        혼자 잘하는 시대는 끝났습니다. 제가 체득한 AI 활용 노하우를 트리노드 UIUX셀 안에서 
+        <strong>공유 가능한 시스템</strong>으로 정리하고, 동료들의 성장 속도를 높이는 데 기여하겠습니다.
+      </div>
+    </div>
+
+    <!-- 매칭 3: 데이터라는 공통의 언어 -->
+    <div class="match-card reveal reveal-d2">
+      <div class="match-card-head">
+        <div class="match-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" fill="#2d8659" opacity="0.15"/>
+            <rect x="10" y="22" width="4" height="8" fill="#2d8659" opacity="0.5"/>
+            <rect x="16" y="18" width="4" height="12" fill="#2d8659" opacity="0.7"/>
+            <rect x="22" y="14" width="4" height="16" fill="#2d8659"/>
+            <rect x="28" y="20" width="4" height="10" fill="#2d8659" opacity="0.6"/>
+            <path d="M8 12 L14 14 L20 10 L26 12 L32 8" stroke="#2d8659" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="match-quote">
+          "<em>데이터라는 공통의 언어</em>로<br>명확하게 소통하는 분"
+        </div>
+      </div>
+      <div class="match-evidence">
+        <div class="match-evidence-label">▸ 저의 증거</div>
+        <div class="match-evidence-text">
+          부산해상관광교통 <strong>'부산바다위' BI 최종 채택</strong>. 
+          대국민 투표와 전문가 자문이라는 까다로운 검증을 거쳐 저의 시안이 최종 선택된 비결은, 디자인의 모든 요소에<strong> 명확한 근거가 뒷받침</strong>되었기 때문입니다.
+        </div>
+      </div>
+      <div class="match-detail">
+        디자인은 주관적인 감상이 아니라 비즈니스의 본질을 시각화하는 과정이어야 합니다. 시안 채택률 1위의 비결은 브랜드가 드러내야 할 단 하나의 <strong>'페르소나'를 명확히 정의</strong>하고, 이를 논리적으로 증명하는 데 있습니다. 유저와 팀원 모두를 납득시킬 수 있는 체계적인 제안이 저의 무기입니다.
+      </div>
+    </div>
+
+    <!-- 매칭 4: 숫자 이면의 진실 -->
+    <div class="match-card reveal reveal-d3">
+      <div class="match-card-head">
+        <div class="match-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" fill="#2d8659" opacity="0.15"/>
+            <circle cx="18" cy="18" r="7" fill="none" stroke="#2d8659" stroke-width="2"/>
+            <path d="M23 23 L30 30" stroke="#2d8659" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="18" cy="18" r="3" fill="#2d8659" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="match-quote">
+          "숫자 이면의 <em>진실을 찾기 위해</em><br>집요하게 파고드는 분"
+        </div>
+      </div>
+      <div class="match-evidence">
+        <div class="match-evidence-label">▸ 저의 증거</div>
+        <div class="match-evidence-text">
+          울트라브이 홈쇼핑 <strong>완판</strong>, 메디포스트 
+          <strong>카테고리 판매 1위</strong>, SHL CI 리뉴얼 총괄. 
+          '팔리는 디자인'의 패턴을 숫자로 추적해온 10년의 기록.
+        </div>
+      </div>
+      <div class="match-detail">
+        "예쁜 디자인"과 "팔리는 디자인"은 다릅니다. 저는 클라이언트의 
+        모호한 의도 뒤에 숨겨진 <strong>비즈니스 본질</strong>, 타깃 유저의 
+        <strong>숨겨진 니즈</strong>를 끝까지 파고드는 작업 방식을 고수합니다. 
+        결과는 채택률과 매출로 증명해 왔습니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT NUMBERS -->
+<div class="impact-wrap">
+  <div class="impact-grid">
+    <div class="impact-cell reveal">
+      <div class="impact-sub">Years of Experience</div>
+      <div class="impact-num">15<span>Y</span></div>
+      <div class="impact-desc">뷰티 브랜드부터 공공 브랜딩까지,<br>시장의 선택을 이끌어온 15년</div>
+    </div>
+    <div class="impact-cell reveal reveal-d1">
+      <div class="impact-sub">Final Selection</div>
+      <div class="impact-num">NO<span>.1</span></div>
+      <div class="impact-desc">주요 프로젝트 최종 채택률<br>압도적 1위</div>
+    </div>
+    <div class="impact-cell reveal reveal-d2">
+      <div class="impact-sub">AI Tools in Workflow</div>
+      <div class="impact-num">10<span>+</span></div>
+      <div class="impact-desc">실무에 통합된 생성형 AI,<br>기획부터 배포까지 커버</div>
+    </div>
+    <div class="impact-cell reveal reveal-d3">
+      <div class="impact-sub">End-to-End System</div>
+      <div class="impact-num">100<span>%</span></div>
+      <div class="impact-desc">기획·디자인·매뉴얼까지,<br>브랜드 시스템 완결성</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="s-label reveal"><span class="s-label-num">02</span> · ABOUT</div>
+  <h2 class="s-title reveal reveal-d1">인하우스부터 에이전시까지,<br>15년의 내공을 <em>AI로 가속화</em>하다</h2>
+
+  <div class="about-grid" style="margin-top:60px">
+    <div class="about-body reveal">
+      <p>
+        <strong>인하우스·프리랜서·에이전시를 관통한 실전 감각.</strong><br>
+        화장품 브랜드 인하우스 디자이너로 시작해, 10년간 프리랜서로 BI·패키지 디자인 전 과정을 책임졌습니다. 
+        <span class="hl">인디 브랜드의 탄생부터 40년 업력 기업의 리뉴얼까지</span> 직접 핸들링했고, 
+        이후 부산 최상위 에이전시 '돋음' 브랜드팀 차장으로 공공 프로젝트의 핵심 실무를 담당했습니다.
+      </p>
+      <p>
+        <strong>설명할 수 있는 디자인이 선택받습니다.</strong><br>
+        제 시안의 채택률이 유독 높은 이유는 명확합니다. 
+        시각적 아름다움에 매몰되지 않고 <span class="hl">클라이언트의 모호한 의도 뒤 비즈니스 본질을 해석</span>했기 때문입니다. 
+        감각적 직관을 논리적 디자인 전략으로 치환하고, 누구나 납득할 수 있는 체계로 구축합니다.
+      </p>
+      <p>
+        <strong>효율에 대한 집착, AI를 만나 폭발했습니다.</strong><br>
+        Midjourney·Claude·Gemini 등을 적재적소에 활용하여 
+        <span class="hl">기획부터 비주얼 시각화, 웹 구현까지 아우르는 워크플로우</span>를 정립했습니다. 
+        이제 이 프로세스를 트리노드의 인프라 안에서 팀 자산으로 확장하고 싶습니다.
+      </p>
+    </div>
+
+    <div class="career-timeline reveal reveal-d1" style="padding-left:12px;border-left:2px solid var(--green-soft)">
+      <div class="career-item">
+        <div class="career-period">2025.07 – 2026.04 · 현재</div>
+        <div class="career-title">페르수스 / 브랜드 디렉터</div>
+        <div class="career-role">DESIGN STUDIO</div>
+        <div class="career-desc">화장품 BI·패키지 디자인 전문 브랜드 운영. AI 워크플로우로 창의적 한계 제거. 제이웨이브 신규 화장품 BI & 패키지 6종, 글로벌 타깃 앰플리오 BI & 패키지 2종 디자인 등</div>
+      </div>
+      <div class="career-item">
+        <div class="career-period">2023.04 – 2025.06</div>
+        <div class="career-title">돋음 / 브랜드디자인팀 차장</div>
+        <div class="career-role">Agency · Team Lead</div>
+        <div class="career-desc">부산해상관광교통 브랜드 '부산바다위' BI, '부산은 스포츠다' BI, 국립부산과학관 10주년 앰블럼 — 주요 프로젝트 최종안 선정. 디자인 혁신 바우처 지원 사업 등 국가 공인 브랜딩 프로젝트 수행</div>
+      </div>
+      <div class="career-item">
+        <div class="career-period">2013.01 – 2023.03</div>
+        <div class="career-title">페르수스 (프리랜서 10년)</div>
+        <div class="career-role">Specialist · Freelance</div>
+        <div class="career-desc">10년간 100여 건 이상의 BI· 화장품 패키지 디자인 완수. 울트라브이 홈쇼핑 완판, 메디포스트 카테고리 1위, SHL CI 리뉴얼 등</div>
+      </div>
+      <div class="career-item">
+        <div class="career-period">2010.08 – 2012.12</div>
+        <div class="career-title">(주)리오엘리 · (주)리스앙쥬</div>
+        <div class="career-role">In-House · Designer</div>
+        <div class="career-desc">화장품 BI·패키지 디자인 전담. 홈쇼핑 런칭 비주얼 전략, 홍콩 코스모프로프 해외 박람회 패널 디자인 등</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects" style="background:var(--bg-alt)">
+  <div class="s-label reveal"><span class="s-label-num">03</span> · PROJECTS</div>
+  <h2 class="s-title reveal reveal-d1">대표 <em>프로젝트</em></h2>
+  <p class="s-sub reveal reveal-d2">말이 아니라 채택된 시안, 매출, 공식 선정으로 증명합니다.</p>
+
+  <div class="proj-grid">
+    <!-- 프로젝트 1 -->
+    <div class="proj-card reveal">
+      <div class="proj-image">
+        <div class="proj-image-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="12" width="36" height="24" rx="2" stroke="currentColor" stroke-width="2"/>
+            <circle cx="16" cy="22" r="3" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 30 L18 20 L30 28 L42 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>부산바다위 BI 비주얼</span>
+        </div>
+      </div>
+      <div class="proj-content">
+        <div class="proj-meta">
+          <span class="proj-num">01</span>
+          <span class="proj-year">2024</span>
+        </div>
+        <h3 class="proj-title">부산해상관광교통 브랜드<br>'부산바다위' BI 디자인 개발</h3>
+        <div class="proj-role">Main Brand Designer @ 돋음</div>
+        <p class="proj-desc">
+          디자인진흥원 경쟁 입찰 수주 이후 1년여에 걸친 개발 과정에서 실무 디자인 전반을 담당. 
+          사내외 검토·전문가 자문·대국민 투표로 이어지는 <strong>다단계 의사결정을 통과해 최종 공식안으로 선정</strong>. 
+          100페이지 분량의 상세 브랜드 가이드라인을 완수하여 부산시 대표 해양 모빌리티 브랜드의 시각 체계를 구축했습니다.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Brand Identity</span>
+          <span class="proj-tag">Guideline Manual</span>
+          <span class="proj-tag">Public Bidding</span>
+          <span class="proj-tag">Final Selection</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 2 -->
+    <div class="proj-card reveal">
+      <div class="proj-image">
+        <div class="proj-image-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 28 L12 40 M32 28 L36 40 M24 26 L24 36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>부산은 스포츠다 BI</span>
+        </div>
+      </div>
+      <div class="proj-content">
+        <div class="proj-meta">
+          <span class="proj-num">02</span>
+          <span class="proj-year">2025</span>
+        </div>
+        <h3 class="proj-title">부산시 생활체육 슬로건<br>'부산은 스포츠다' BI 디자인 개발</h3>
+        <div class="proj-role">Main Brand Designer @ 돋음</div>
+        <p class="proj-desc">
+          팀 내부에서 도출된 <strong>다수의 시안 중 제 디자인이 최종 채택</strong>. 
+          현수막, 어패럴(모자·의류) 등 핵심 접점의 어플리케이션 시스템을 설계하여 
+          일관된 브랜드 경험을 구현했습니다.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Brand Identity</span>
+          <span class="proj-tag">Application System</span>
+          <span class="proj-tag">Busan City</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 3 -->
+    <div class="proj-card reveal">
+      <div class="proj-image">
+        <div class="proj-image-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 36 L12 20 L24 10 L36 20 L36 36 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M18 6 L24 10 L30 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>국립부산과학관 10주년 앰블럼</span>
+        </div>
+      </div>
+      <div class="proj-content">
+        <div class="proj-meta">
+          <span class="proj-num">03</span>
+          <span class="proj-year">2024</span>
+        </div>
+        <h3 class="proj-title">국립부산과학관 10주년<br>기념 앰블럼 디자인 개발</h3>
+        <div class="proj-role">Main Brand Designer @ 돋음</div>
+        <p class="proj-desc">
+          '지속성과 확장성'을 키워드로 기관 상징 건축물을 모티프로 활용, 
+          파티모자 형상의 조형 언어로 재해석하여 <strong>10주년 기념성과 축제 에너지를 동시에 담아냈습니다</strong>. 
+          시그니처 시스템 수립 및 가이드 매뉴얼 제작 완수.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Emblem Design</span>
+          <span class="proj-tag">Anniversary BI</span>
+          <span class="proj-tag">National Institution</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 4 -->
+    <div class="proj-card reveal">
+      <div class="proj-image">
+        <div class="proj-image-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 10 L30 10 L32 14 L30 42 L18 42 L16 14 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M16 14 L32 14" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 6 L26 6 L27 10 L21 10 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          <span>데콜라주 워터 겔 패키지</span>
+        </div>
+      </div>
+      <div class="proj-content">
+        <div class="proj-meta">
+          <span class="proj-num">04</span>
+          <span class="proj-year">2022</span>
+        </div>
+        <h3 class="proj-title">데콜라주 하이드라이팅<br>워터 겔 패키지 디자인</h3>
+        <div class="proj-role">Lead Designer @ 페르수스</div>
+        <p class="proj-desc">
+          '여행 중에도 유지되는 피부의 편안함' 컨셉. 
+          와인 보틀 실루엣을 용기에 차용하여 여행의 설렘과 여유를 전달. 
+          <strong>화이트×네이비 투톤과 유기적 곡선으로 브랜드 페르소나를 투영</strong>했습니다.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Package Design</span>
+          <span class="proj-tag">Cosmetic Brand</span>
+          <span class="proj-tag">Premium</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 5 -->
+    <div class="proj-card reveal">
+      <div class="proj-image">
+        <div class="proj-image-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="10" width="36" height="26" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 16 L42 16" stroke="currentColor" stroke-width="2"/>
+            <circle cx="11" cy="13" r="1" fill="currentColor"/>
+            <circle cx="14" cy="13" r="1" fill="currentColor"/>
+            <path d="M16 24 L14 28 L16 32 M32 24 L34 28 L32 32 M22 22 L26 34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>AI 기반 1인 브랜드 스튜디오</span>
+        </div>
+      </div>
+      <div class="proj-content">
+        <div class="proj-meta">
+          <span class="proj-num">05</span>
+          <span class="proj-year">2025~</span>
+        </div>
+        <h3 class="proj-title">AI 기반 1인 브랜드<br>디자인 스튜디오 운영</h3>
+        <div class="proj-role">Founder & Lead Designer @ 페르수스</div>
+        <p class="proj-desc">
+          Midjourney 비주얼 컨셉 도출 → Photoshop·Illustrator 고밀도 후작업 워크플로우 구축. 
+          Claude·Gemini로 반응형 웹페이지 및 비즈니스 프레임워크를 직접 설계·배포. 
+          <strong>본 웹 이력서 또한 Claude와의 긴밀한 협업 결과물</strong>입니다.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">AI Workflow</span>
+          <span class="proj-tag">Web Development</span>
+          <span class="proj-tag">Studio Founder</span>
+          <span class="proj-tag">Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI WORKFLOW - REDESIGNED (촌스러운 이모지 제거, 가독성 우선) -->
+<section class="section ai-section" id="ai">
+  <div class="ai-header">
+    <div>
+      <div class="s-label reveal"><span class="s-label-num">04</span> · AI WORKFLOW</div>
+      <h2 class="s-title reveal reveal-d1">말이 아니라<br><em>결과로 증명합니다</em></h2>
+    </div>
+    <div class="ai-intro reveal reveal-d2">
+      <p style="margin-bottom:16px">
+        <strong>AI 디자이너를 지원합니다.</strong>
+      </p>
+      <p>
+        어떤 작업을 AI에게 맡기면 빨라지고, 어떤 작업은 사람이 끝까지 가야 하는지 
+        실전으로 체득했습니다. 도구를 쓰는 게 아니라, 도구와 역할을 나누는 법을 습득한 것입니다. 
+        채용 공고에서 요구하는 <strong>'생성형 AI 활용 경험 + 프롬프트 작성 이해'</strong>는 
+        저에게 이미 일상입니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- Tool Stack -->
+  <div class="tool-stack reveal">
+    <div class="tool-stack-label">MY AI STACK · 실무 검증 완료</div>
+    <div class="tool-stack-title">
+      10개 이상의 AI 툴이<br>
+      <em>제 손끝에서 조율되고 있습니다</em>
+    </div>
+    <div class="tool-pills">
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Midjourney</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Claude</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>ChatGPT</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Gemini</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Grok</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>NotebookLM</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Claude Design</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Photoshop</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Illustrator</span>
+      <span class="tool-pill"><span class="tool-pill-dot"></span>Perplexity</span>
+    </div>
+  </div>
+
+  <!-- AI Workflow Blocks (이모지 없음, 타이포그래피 중심) -->
+  <div class="ai-workflow-grid">
+    <div class="ai-block reveal">
+      <div class="ai-block-num">WORKFLOW · 01</div>
+      <h3 class="ai-block-title">컨셉 아트 & 이미지 리소스 제작</h3>
+      <div class="ai-block-desc">
+        <strong>Midjourney로 컨셉 비주얼을 빠르게 도출</strong>하고, Photoshop·Illustrator로 디테일을 정제하여 실제 브랜드 자산으로 활용합니다. 
+        채용 공고의 '생성형 AI를 활용한 컨셉 아트 및 이미지 리소스 제작' 요구사항과 정확히 일치하는 실무 경험.
+      </div>
+    </div>
+    <div class="ai-block reveal reveal-d1">
+      <div class="ai-block-num">WORKFLOW · 02</div>
+      <h3 class="ai-block-title">반응형 웹 & 서류 폼 직접 구축</h3>
+      <div class="ai-block-desc">
+        <strong>Claude·ChatGPT·Gemini를 목적에 따라 구분 사용</strong>합니다. 
+        반응형 웹 페이지, 견적 서류 폼, 랜딩 페이지를 직접 코딩·배포해 운영 중. 
+        이 이력서도 동일 방식으로 제작되었습니다.
+      </div>
+    </div>
+    <div class="ai-block reveal reveal-d2">
+      <div class="ai-block-num">WORKFLOW · 03</div>
+      <h3 class="ai-block-title">프롬프트 엔지니어링 · 역할 분담</h3>
+      <div class="ai-block-desc">
+        단순히 툴을 '쓰는 것'이 아니라, <strong>어떤 작업에 AI를 투입할 때 효율이 극대화되는지</strong> 실전으로 체득. 
+        AI와 역할을 명확히 분담하여 최종 결과물의 품질을 관리하는 방법을 사용하고 있습니다.
+      </div>
+    </div>
+    <div class="ai-block reveal reveal-d3">
+      <div class="ai-block-num">WORKFLOW · 04</div>
+      <h3 class="ai-block-title">리서치 · 트렌드 선행 · 인사이트 도출</h3>
+      <div class="ai-block-desc">
+        GPT로 최신 <strong>브랜딩 트렌드를 모니터링</strong>하며 업계 흐름을 놓치지 않습니다. NotebookLM을 활용해 방대한 자료 속에서 프로젝트에 필요한 <strong>핵심 정보</strong>를 빠르게 찾아냅니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="transform-section reveal">
+    <h3 class="transform-title">AI 도입 전 · 후, <em>제 일은 이렇게 바뀌었습니다</em></h3>
+    <div class="transform-grid">
+      <div class="transform-col">
+        <span class="transform-label">BEFORE AI</span>
+        <div class="transform-items">
+          <div class="transform-item">웹 페이지 외주 의뢰 → 비용·시간 소모</div>
+          <div class="transform-item">견적서 수동 작성 → 반복 노동</div>
+          <div class="transform-item">3D 목업 이미지 → 외주 또는 장시간 작업</div>
+          <div class="transform-item">트렌드 리서치 → 수작업 서핑</div>
+        </div>
+      </div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-col after">
+        <span class="transform-label">AFTER AI</span>
+        <div class="transform-items">
+          <div class="transform-item">AI 협업 자체 제작 → 즉시 배포</div>
+          <div class="transform-item">자동화 폼 구축 → 클릭 한 번으로 완성</div>
+          <div class="transform-item">3초 완성 3D 목업 → 무제한 시안 생성</div>
+          <div class="transform-item">AI 뉴스 알림 → 실시간 트렌드 선행</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDU + PROFILE -->
+<section class="section" id="profile" style="background:var(--bg-alt)">
+  <div class="s-label reveal"><span class="s-label-num">05</span> · EDUCATION · PROFILE</div>
+  <h2 class="s-title reveal reveal-d1">배경과 역량의 <em>토대</em></h2>
+
+  <div class="edu-grid" style="margin-top:40px">
+    <div class="edu-card reveal">
+      <span class="edu-badge">Education</span>
+      <div class="edu-title">부경대학교</div>
+      <div class="edu-period">2005.03 – 2010.08 · 졸업</div>
+      <div class="edu-detail">
+        <span>전공 · 산업디자인과</span>
+        <span>학점 · 3.32 / 4.5</span>
+      </div>
+      <div style="margin-top:28px">
+        <span class="edu-badge" style="margin-bottom:14px">Design Skills</span>
+        <div class="skill-tags">
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">Illustrator</span>
         
-        // 스크롤 인디케이터 숨기기
-        window.addEventListener('scroll', () => {
-            const indicator = document.querySelector('.scroll-indicator');
-            if (window.scrollY > 100) {
-                indicator.style.opacity = '0';
-            } else {
-                indicator.style.opacity = '1';
-            }
-        });
-    </script>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <span class="edu-badge" style="margin-bottom:14px">AI Tools</span>
+        <div class="skill-tags">
+          <span class="skill-tag">Claude</span>
+          <span class="skill-tag">ChatGPT</span>
+          <span class="skill-tag">Midjourney</span>
+          <span class="skill-tag">Gemini</span>
+          <span class="skill-tag">Grok</span>
+          <span class="skill-tag">NotebookLM</span>
+         <span class="skill-tag">Perplexity</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-card reveal reveal-d1">
+      <span class="edu-badge">Awards · Certification</span>
+      <div class="edu-sub-item">
+        <div class="edu-sub-label">수상 · 2008.10</div>
+        <div class="edu-title" style="font-size:0.98rem">2008 부산국제건축문화제 실내건축대전</div>
+        <div class="edu-detail">사단법인 한국실내건축가협회 부산·경남지회</div>
+      </div>
+      <div class="edu-sub-item">
+        <div class="edu-sub-label">자격 · 2005.04</div>
+        <div class="edu-title" style="font-size:0.98rem">정보기술자격(ITQ) 아래한글</div>
+        <div class="edu-detail">한국생산성본부 · 최종합격</div>
+      </div>
+      <div class="edu-sub-item">
+        <div class="edu-sub-label">자격 · 2013.08</div>
+        <div class="edu-title" style="font-size:0.98rem">2종보통 운전면허</div>
+        <div class="edu-detail">경찰청 · 최종합격</div>
+      </div>
+      <div class="edu-sub-item">
+        <div class="edu-sub-label">사회활동 · 2014.01</div>
+        <div class="edu-title" style="font-size:0.98rem">두드림 국토대장정</div>
+        <div class="edu-detail">제주도 해안도로 일주 국토대장정</div>
+      </div>
+    </div>
+
+    <div class="edu-card reveal reveal-d2">
+      <span class="edu-badge">Profile Summary</span>
+      <div class="profile-info" style="margin-top:20px">
+        <div class="profile-row"><span class="profile-key">생년월일</span><span class="profile-val">1987년 (39세)</span></div>
+        <div class="profile-row"><span class="profile-key">학력</span><span class="profile-val">대학교 4년 졸업</span></div>
+        <div class="profile-row"><span class="profile-key">총 경력</span><span class="profile-val">15년</span></div>
+        <div class="profile-row"><span class="profile-key">거주지</span><span class="profile-val">부산 수영구</span></div>
+        <div class="profile-row"><span class="profile-key">지원 포지션</span><span class="profile-val" style="color:var(--green)">UIUX셀 AI 디자이너</span></div>
+        <div class="profile-row"><span class="profile-key">희망 연봉</span><span class="profile-val">면접 시 협의</span></div>
+        <div class="profile-row"><span class="profile-key">입사 가능일</span><span class="profile-val">즉시 가능</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-bg"></div>
+  <div class="contact-inner">
+    <div class="contact-label">
+      <span>06 · LET'S WORK TOGETHER</span>
+    </div>
+    <h2 class="contact-title reveal">
+      트리노드의 다음 챕터,<br>
+      <em>제가 함께 쓰겠습니다.</em>
+    </h2>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="cc-label">Phone</div>
+        <div class="cc-value">010-9186-9820</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Email</div>
+        <div class="cc-value" style="font-size:0.92rem">angcho24@naver.com</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Location</div>
+        <div class="cc-value">부산 수영구 호암로</div>
+        <div class="cc-sub">트리노드 사무실 근거리</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Position</div>
+        <div class="cc-value">AI Designer</div>
+        <div class="cc-sub">UIUX셀 · 포코머지팀</div>
+      </div>
+    </div>
+
+    <div class="contact-footer">
+      <div class="contact-copy">배수현 · 트리노드 UIUX셀 AI 디자이너 지원 · 2026. 04 · Built with Claude</div>
+      <div class="contact-end">— 경력기술서 별첨 · END —</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAB -->
+<div class="fab-group">
+  <button class="fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <a href="#" class="fab" onclick="alert('이력서 PDF 파일은 별도 첨부로 제공됩니다.');return false;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+    </svg>
+    이력서 PDF
+  </a>
+  <a href="#" class="fab" onclick="alert('경력기술서 PDF 파일은 별도 첨부로 제공됩니다.');return false;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+    </svg>
+    경력기술서 PDF
+  </a>
+</div>
+
+<script>
+// Theme toggle
+function toggleTheme(){
+  const root=document.documentElement;
+  const cur=root.getAttribute('data-theme');
+  const next=cur==='light'?'dark':'light';
+  root.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
+}
+// Load saved theme
+(function(){
+  const saved=localStorage.getItem('theme');
+  if(saved)document.documentElement.setAttribute('data-theme',saved);
+})();
+
+// Rabbit cursor
+const rabbit=document.getElementById('rabbit');
+const dot=document.getElementById('dot');
+let tx=0,ty=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  tx=e.clientX;ty=e.clientY;
+  dot.style.left=tx+'px';dot.style.top=ty+'px';
+});
+function animate(){
+  rx+=(tx-rx)*0.15;ry+=(ty-ry)*0.15;
+  rabbit.style.left=rx+'px';rabbit.style.top=ry+'px';
+  requestAnimationFrame(animate);
+}
+animate();
+
+// Hover states
+document.querySelectorAll('a, button, .match-card, .proj-card, .ai-block, .impact-cell').forEach(el=>{
+  el.addEventListener('mouseenter',()=>rabbit.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>rabbit.classList.remove('hover'));
+});
+
+// Click burst
+document.addEventListener('click',e=>{
+  if(e.target.closest('button, a'))return;
+  const burst=document.createElement('div');
+  burst.className='click-burst';
+  burst.style.left=e.clientX+'px';burst.style.top=e.clientY+'px';
+  for(let i=0;i<6;i++){
+    const s=document.createElement('span');
+    burst.appendChild(s);
+  }
+  document.body.appendChild(burst);
+  setTimeout(()=>burst.remove(),700);
+});
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// FAB top visibility
+const fabTop=document.getElementById('fabTop');
+window.addEventListener('scroll',()=>{
+  fabTop.classList.toggle('visible',window.scrollY>500);
+});
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#')return;
+    e.preventDefault();
+    const t=document.querySelector(href);
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
 </body>
 </html>
