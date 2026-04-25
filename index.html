@@ -38,11 +38,11 @@ button{cursor:none;background:none;border:none;color:inherit;font-family:inherit
 .theme-toggle:hover{border-color:var(--green);color:var(--green);transform:rotate(20deg)}
 .theme-toggle svg{width:18px;height:18px}
 [data-theme="light"] .theme-toggle .moon{display:block}[data-theme="light"] .theme-toggle .sun{display:none}[data-theme="dark"] .theme-toggle .moon{display:none}[data-theme="dark"] .theme-toggle .sun{display:block}
-.hero{padding:120px 40px 40px;position:relative;display:grid;grid-template-columns:1fr;align-items:start;overflow:hidden}
+.hero{padding:120px 40px 40px 80px;position:relative;display:grid;grid-template-columns:1fr;align-items:start;overflow:hidden}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,var(--green-soft) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,var(--peach) 0%,transparent 60%);opacity:0.6}
 [data-theme="dark"] .hero-bg{opacity:0.4}
 .hero-grain{position:absolute;inset:0;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.hero-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr;position:relative;z-index:2;width:100%}
+.hero-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr;position:relative;z-index:2;width:100%}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--green-soft);color:var(--green-deep);padding:8px 16px;border-radius:100px;font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;letter-spacing:0.05em;margin-bottom:32px}
 .hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
