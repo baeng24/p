@@ -7,556 +7,107 @@
 <meta name="description" content="15년 브랜딩 내공 + AI 워크플로우. 트리노드가 찾던 바로 그 디자이너, 배수현입니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css');
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-
-/* ===== THEME VARIABLES ===== */
-:root[data-theme="light"]{
-  --bg:#fcfbf7;
-  --bg-alt:#f4f1e8;
-  --bg-card:#ffffff;
-  --bg-sub:#f8f5ec;
-  --text:#1a1f1a;
-  --text-sub:#4a524a;
-  --text-dim:#8a918a;
-  --text-faint:rgba(26,31,26,0.25);
-  --green:#2d8659;
-  --green-bright:#3aa36d;
-  --green-deep:#1e5c3d;
-  --green-soft:#e8f3ec;
-  --peach:#f5e6d3;
-  --line:rgba(26,31,26,0.08);
-  --line-bold:rgba(26,31,26,0.18);
-  --shadow:0 4px 24px rgba(26,31,26,0.06);
-  --shadow-lg:0 12px 48px rgba(26,31,26,0.1);
-}
-:root[data-theme="dark"]{
-  --bg:#0f1410;
-  --bg-alt:#161c17;
-  --bg-card:#1a211c;
-  --bg-sub:#13181400;
-  --text:#f0ede3;
-  --text-sub:#b8bcb3;
-  --text-dim:#787c73;
-  --text-faint:rgba(240,237,227,0.2);
-  --green:#4ab380;
-  --green-bright:#5dc796;
-  --green-deep:#2d8659;
-  --green-soft:rgba(74,179,128,0.1);
-  --peach:#2a2620;
-  --line:rgba(240,237,227,0.08);
-  --line-bold:rgba(240,237,227,0.2);
-  --shadow:0 4px 24px rgba(0,0,0,0.3);
-  --shadow-lg:0 12px 48px rgba(0,0,0,0.5);
-}
-
-:root{
-  --ff-display:'Gowun Batang',serif;
-  --ff-body:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
-  --ff-mono:'Space Mono',monospace;
-  --ff-hero:'Bebas Neue',sans-serif;
-}
-
+:root[data-theme="light"]{--bg:#fcfbf7;--bg-alt:#f4f1e8;--bg-card:#ffffff;--bg-sub:#f8f5ec;--text:#1a1f1a;--text-sub:#4a524a;--text-dim:#8a918a;--text-faint:rgba(26,31,26,0.25);--green:#2d8659;--green-bright:#3aa36d;--green-deep:#1e5c3d;--green-soft:#e8f3ec;--peach:#f5e6d3;--line:rgba(26,31,26,0.08);--line-bold:rgba(26,31,26,0.18);--shadow:0 4px 24px rgba(26,31,26,0.06);--shadow-lg:0 12px 48px rgba(26,31,26,0.1)}
+:root[data-theme="dark"]{--bg:#0f1410;--bg-alt:#161c17;--bg-card:#1a211c;--bg-sub:#13181400;--text:#f0ede3;--text-sub:#b8bcb3;--text-dim:#787c73;--text-faint:rgba(240,237,227,0.2);--green:#4ab380;--green-bright:#5dc796;--green-deep:#2d8659;--green-soft:rgba(74,179,128,0.1);--peach:#2a2620;--line:rgba(240,237,227,0.08);--line-bold:rgba(240,237,227,0.2);--shadow:0 4px 24px rgba(0,0,0,0.3);--shadow-lg:0 12px 48px rgba(0,0,0,0.5)}
+:root{--ff-display:'Gowun Batang',serif;--ff-body:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;--ff-mono:'Space Mono',monospace}
 html{scroll-behavior:smooth}
-body{
-  font-family:var(--ff-body);
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  cursor:none;
-  transition:background 0.4s ease,color 0.4s ease;
-  line-height:1.7;
-  font-weight:400;
-}
+body{font-family:var(--ff-body);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;transition:background 0.4s ease,color 0.4s ease;line-height:1.7;font-weight:400}
 a{color:inherit;text-decoration:none}
 button{cursor:none;background:none;border:none;color:inherit;font-family:inherit}
-
-/* ===== CUSTOM CURSOR - RABBIT ===== */
-.cursor-rabbit{
-  position:fixed;width:48px;height:48px;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:transform 0.08s ease-out,width 0.25s,height 0.25s;
-  will-change:transform;
-}
+.cursor-rabbit{position:fixed;width:48px;height:48px;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.08s ease-out;will-change:transform}
 .cursor-rabbit svg{width:100%;height:100%;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15))}
-.cursor-dot{
-  position:fixed;width:6px;height:6px;
-  background:var(--green);border-radius:50%;
-  pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);
-  transition:width 0.2s,height 0.2s,background 0.2s;
-}
+.cursor-dot{position:fixed;width:6px;height:6px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
 .cursor-rabbit.hover{transform:translate(-50%,-50%) scale(1.2) rotate(-8deg)}
-
-/* Click burst */
-.click-burst{
-  position:fixed;pointer-events:none;z-index:9997;
-  width:60px;height:60px;transform:translate(-50%,-50%);
-}
-.click-burst span{
-  position:absolute;top:50%;left:50%;
-  width:4px;height:4px;border-radius:50%;
-  background:var(--green);
-  animation:burst 0.6s ease-out forwards;
-}
-.click-burst span:nth-child(1){--a:0deg}
-.click-burst span:nth-child(2){--a:60deg}
-.click-burst span:nth-child(3){--a:120deg}
-.click-burst span:nth-child(4){--a:180deg}
-.click-burst span:nth-child(5){--a:240deg}
-.click-burst span:nth-child(6){--a:300deg}
-@keyframes burst{
-  0%{transform:rotate(var(--a)) translateY(0) scale(1);opacity:1}
-  100%{transform:rotate(var(--a)) translateY(30px) scale(0);opacity:0}
-}
-
-/* ===== NAVIGATION ===== */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:0 40px;height:72px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
-  transition:background 0.4s;
-}
-.nav-logo{
-  display:flex;align-items:center;gap:12px;
-  font-family:var(--ff-display);
-  font-size:1.35rem;font-weight:700;
-  letter-spacing:-0.02em;
-}
-.nav-logo-mark{
-  width:36px;height:36px;
-  background:var(--green);
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;
-  letter-spacing:0.05em;
-}
+.click-burst{position:fixed;pointer-events:none;z-index:9997;width:60px;height:60px;transform:translate(-50%,-50%)}
+.click-burst span{position:absolute;top:50%;left:50%;width:4px;height:4px;border-radius:50%;background:var(--green);animation:burst 0.6s ease-out forwards}
+.click-burst span:nth-child(1){--a:0deg}.click-burst span:nth-child(2){--a:60deg}.click-burst span:nth-child(3){--a:120deg}.click-burst span:nth-child(4){--a:180deg}.click-burst span:nth-child(5){--a:240deg}.click-burst span:nth-child(6){--a:300deg}
+@keyframes burst{0%{transform:rotate(var(--a)) translateY(0) scale(1);opacity:1}100%{transform:rotate(var(--a)) translateY(30px) scale(0);opacity:0}}
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb, var(--bg) 85%, transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:background 0.4s}
+.nav-logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-display);font-size:1.35rem;font-weight:700;letter-spacing:-0.02em}
+.nav-logo-mark{width:36px;height:36px;background:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;letter-spacing:0.05em}
 .nav-links{display:flex;gap:4px;list-style:none;align-items:center}
-.nav-links a{
-  font-size:0.85rem;font-weight:500;
-  color:var(--text-sub);
-  padding:8px 16px;border-radius:8px;
-  transition:all 0.2s;
-  position:relative;
-}
+.nav-links a{font-size:0.85rem;font-weight:500;color:var(--text-sub);padding:8px 16px;border-radius:8px;transition:all 0.2s}
 .nav-links a:hover{color:var(--green);background:var(--green-soft)}
-
 .nav-right{display:flex;align-items:center;gap:16px}
-.nav-tag{
-  font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;
-  color:var(--green);
-  background:var(--green-soft);
-  padding:6px 14px;border-radius:100px;
-  letter-spacing:0.05em;
-}
-.theme-toggle{
-  width:40px;height:40px;
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;
-}
+.nav-tag{font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;color:var(--green);background:var(--green-soft);padding:6px 14px;border-radius:100px;letter-spacing:0.05em}
+.theme-toggle{width:40px;height:40px;background:var(--bg-card);border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
 .theme-toggle:hover{border-color:var(--green);color:var(--green);transform:rotate(20deg)}
 .theme-toggle svg{width:18px;height:18px}
-[data-theme="light"] .theme-toggle .moon{display:block}
-[data-theme="light"] .theme-toggle .sun{display:none}
-[data-theme="dark"] .theme-toggle .moon{display:none}
-[data-theme="dark"] .theme-toggle .sun{display:block}
-
-/* ===== HERO ===== */
-.hero{
-  min-height:100vh;
-  padding:120px 40px 60px;
-  position:relative;
-  display:grid;
-  grid-template-columns:1fr;
-  align-items:center;
-  overflow:hidden;
-}
-.hero-bg{
-  position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse at 20% 30%,var(--green-soft) 0%,transparent 60%),
-    radial-gradient(ellipse at 80% 70%,var(--peach) 0%,transparent 60%);
-  opacity:0.6;
-}
+[data-theme="light"] .theme-toggle .moon{display:block}[data-theme="light"] .theme-toggle .sun{display:none}[data-theme="dark"] .theme-toggle .moon{display:none}[data-theme="dark"] .theme-toggle .sun{display:block}
+.hero{padding:120px 40px 40px 80px;position:relative;display:grid;grid-template-columns:1fr;align-items:start;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,var(--green-soft) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,var(--peach) 0%,transparent 60%);opacity:0.6}
 [data-theme="dark"] .hero-bg{opacity:0.4}
-
-.hero-grain{
-  position:absolute;inset:0;pointer-events:none;opacity:0.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* hero-inner: 단일 컬럼, 좌측 정렬 */
-.hero-inner{
-  max-width:900px;margin:0 auto;
-  display:grid;grid-template-columns:1fr;
-  position:relative;z-index:2;
-  width:100%;
-}
-
-.hero-left{}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--green-soft);
-  color:var(--green-deep);
-  padding:8px 16px;border-radius:100px;
-  font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;
-  letter-spacing:0.05em;margin-bottom:32px;
-}
-.hero-badge-dot{
-  width:6px;height:6px;background:var(--green);
-  border-radius:50%;
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:0.5;transform:scale(1.3)}
-}
+.hero-grain{position:absolute;inset:0;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-inner{max-width:900px;margin:0;display:grid;grid-template-columns:1fr;position:relative;z-index:2;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--green-soft);color:var(--green-deep);padding:8px 16px;border-radius:100px;font-family:var(--ff-mono);font-size:0.7rem;font-weight:700;letter-spacing:0.05em;margin-bottom:32px}
+.hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
 [data-theme="dark"] .hero-badge{color:var(--green-bright)}
-
-.hero-title{
-  font-family:var(--ff-display);
-  font-size:clamp(3rem,6.5vw,6rem);
-  line-height:1.05;
-  font-weight:700;
-  letter-spacing:-0.03em;
-  color:var(--text);
-  margin-bottom:24px;
-}
-.hero-title-highlight{
-  color:var(--green);
-  position:relative;
-  display:inline-block;
-}
-.hero-title-highlight::after{
-  content:'';position:absolute;
-  bottom:6px;left:-2px;right:-2px;height:14px;
-  background:var(--green-soft);
-  z-index:-1;border-radius:4px;
-}
-
-.hero-name-row{
-  display:flex;align-items:baseline;gap:20px;
-  margin-bottom:40px;flex-wrap:wrap;
-}
-.hero-name{
-  font-family:var(--ff-display);
-  font-size:clamp(2.5rem,5vw,4rem);
-  font-weight:700;letter-spacing:-0.02em;
-  color:var(--text);
-}
-.hero-name-en{
-  font-family:var(--ff-mono);font-size:0.85rem;
-  color:var(--text-dim);letter-spacing:0.15em;
-}
-
-.hero-tagline{
-  font-size:1.08rem;
-  line-height:2;
-  color:var(--text-sub);
-  max-width:700px;
-  margin-bottom:48px;
-}
+.hero-title{font-family:var(--ff-display);font-size:clamp(2.4rem,5vw,4.8rem);line-height:1.05;font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-bottom:24px}
+.hero-title-highlight{color:var(--green);position:relative;display:inline-block}
+.hero-title-highlight::after{content:'';position:absolute;bottom:6px;left:-2px;right:-2px;height:14px;background:var(--green-soft);z-index:-1;border-radius:4px}
+.hero-name-row{display:flex;align-items:baseline;gap:20px;margin-bottom:40px;flex-wrap:wrap}
+.hero-name{font-family:var(--ff-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:700;letter-spacing:-0.02em;color:var(--text)}
+.hero-name-en{font-family:var(--ff-mono);font-size:0.85rem;color:var(--text-dim);letter-spacing:0.15em}
+/* ★ margin-bottom 48px → 0 */
+.hero-tagline{font-size:1.08rem;line-height:2;color:var(--text-sub);max-width:700px;margin-bottom:0}
 .hero-tagline strong{color:var(--text);font-weight:700}
-.hero-tagline .accent{color:var(--green);font-weight:700}
-
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:14px 28px;border-radius:12px;
-  font-size:0.92rem;font-weight:600;
-  transition:all 0.2s;
-}
-.btn-primary{
-  background:var(--green);color:#fff;
-}
-.btn-primary:hover{background:var(--green-deep);transform:translateY(-2px);box-shadow:var(--shadow)}
-.btn-ghost{
-  background:transparent;color:var(--text);
-  border:1px solid var(--line-bold);
-}
-.btn-ghost:hover{border-color:var(--green);color:var(--green)}
-
-/* ===== CLAUDE CREDIT BANNER ===== */
-.claude-banner{
-  background:var(--bg-alt);
-  padding:20px 40px;
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  font-size:0.82rem;color:var(--text-sub);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  flex-wrap:wrap;
-}
+.claude-banner{background:var(--bg-alt);padding:20px 40px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:0.82rem;color:var(--text-sub);border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:wrap}
 .claude-banner strong{color:var(--green);font-weight:700}
-.claude-banner-icon{
-  width:24px;height:24px;
-  background:var(--green);
-  border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:0.65rem;font-weight:700;
-  font-family:var(--ff-mono);
-}
-
-/* ===== SECTION COMMON ===== */
-.section{
-  padding:120px 40px;
-  max-width:1400px;margin:0 auto;
-  position:relative;
-}
-.section-alt{background:var(--bg-alt)}
-.section-alt-wrap{background:var(--bg-alt);padding:0}
-
-.s-label{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;
-  color:var(--green);letter-spacing:0.15em;
-  text-transform:uppercase;margin-bottom:20px;
-  background:var(--green-soft);
-  padding:8px 14px;border-radius:100px;
-}
-.s-label-num{
-  font-family:var(--ff-mono);font-size:0.65rem;
-  color:var(--green-deep);font-weight:700;
-}
+.claude-banner-icon{width:24px;height:24px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.65rem;font-weight:700;font-family:var(--ff-mono)}
+.section{padding:120px 40px;max-width:1400px;margin:0 auto;position:relative}
+#match{padding-bottom:60px}
+.s-label{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;color:var(--green);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:20px;background:var(--green-soft);padding:8px 14px;border-radius:100px}
+.s-label-num{font-family:var(--ff-mono);font-size:0.65rem;color:var(--green-deep);font-weight:700}
 [data-theme="dark"] .s-label-num{color:var(--green-bright)}
-
-.s-title{
-  font-family:var(--ff-display);
-  font-size:clamp(2rem,4.5vw,3.5rem);
-  font-weight:700;
-  line-height:1.2;letter-spacing:-0.02em;
-  color:var(--text);margin-bottom:20px;
-}
+.s-title{font-family:var(--ff-display);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:700;line-height:1.2;letter-spacing:-0.02em;color:var(--text);margin-bottom:20px}
 .s-title em{color:var(--green);font-style:normal}
-.s-sub{
-  font-size:1.05rem;color:var(--text-sub);
-  max-width:720px;line-height:1.9;margin-bottom:56px;
-}
-
-/* ===== MATCH SECTION - SLOT MACHINE ===== */
 .match-header{text-align:center;margin-bottom:72px}
-.match-title{
-  font-family:var(--ff-display);
-  font-size:clamp(2rem,4.5vw,3.5rem);
-  font-weight:700;line-height:1.3;
-  margin-bottom:20px;
-  letter-spacing:-0.02em;
-}
+.match-title{font-family:var(--ff-display);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:700;line-height:1.3;margin-bottom:20px;letter-spacing:-0.02em}
 .match-title em{color:var(--green);font-style:normal;position:relative;display:inline-block}
-.match-title em::after{
-  content:'';position:absolute;
-  left:0;right:0;bottom:2px;height:10px;
-  background:var(--green-soft);z-index:-1;
-}
-
-.match-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  position:relative;
-}
-
-.match-card{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  height:520px;
-  position:relative;
-  overflow:hidden;
-  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),
-             border-color 0.3s,
-             box-shadow 0.3s;
-}
-
-/* 릴(슬롯) 컨테이너 */
-.match-reel{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-  border-radius:20px;
-}
-.match-reel-inner{
-  width:100%;
-  height:100%;
-}
-
-/* 각 슬롯: 5개의 더미 + 1개의 진짜 = 6개 아이템 세로로 쌓임
-   기본 상태: 맨 아래 slot-real(6번째, index 5)이 보이도록 -2600px */
-.reel-slot{
-  display:flex;
-  flex-direction:column;
-  transform:translateY(-2600px);
-  will-change:transform;
-}
-
-.slot-dummy{
-  width:100%;
-  height:520px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--bg-sub);
-  border-bottom:1px solid var(--line);
-}
-.slot-dummy .dummy-icon{
-  font-size:3rem;
-  color:var(--text-faint);
-  opacity:0.5;
-}
-
-.slot-real{
-  width:100%;
-  height:520px;
-  flex-shrink:0;
-  padding:36px 30px 32px;
-  background:var(--bg-card);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  position:relative;
-}
-
-/* 매칭 카드 내용물 */
-.match-num{
-  position:absolute;
-  top:24px;right:28px;
-  font-family:var(--ff-body);
-  font-weight:800;
-  font-size:1.6rem;
-  color:var(--text-faint);
-  letter-spacing:-0.03em;
-  line-height:1;
-}
-.match-tag{
-  display:inline-block;
-  align-self:flex-start;
-  font-family:var(--ff-mono);
-  font-size:0.62rem;font-weight:700;
-  color:var(--green);
-  background:var(--green-soft);
-  padding:6px 12px;
-  border-radius:100px;
-  letter-spacing:0.05em;
-  margin-top:48px;
-  margin-bottom:18px;
-}
-.match-head{
-  font-family:var(--ff-body);
-  font-weight:700;
-  font-size:1.2rem;
-  line-height:1.5;
-  color:var(--text);
-  letter-spacing:-0.02em;
-  margin-bottom:20px;
-}
-.match-body{
-  font-size:0.85rem;
-  line-height:1.85;
-  color:var(--text-sub);
-}
+.match-title em::after{content:'';position:absolute;left:0;right:0;bottom:2px;height:10px;background:var(--green-soft);z-index:-1}
+.match-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+/* ★ height 520 → 360 */
+.match-card{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;height:360px;position:relative;overflow:hidden;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.3s}
+.match-reel{position:absolute;inset:0;overflow:hidden;border-radius:20px}
+.match-reel-inner{width:100%;height:100%}
+/* ★ transform -2600 → -1800 (360×5) */
+.reel-slot{display:flex;flex-direction:column;transform:translateY(-1800px);will-change:transform}
+/* ★ height 520 → 360 */
+.slot-dummy{width:100%;height:360px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--bg-sub);border-bottom:1px solid var(--line)}
+.slot-dummy .dummy-icon{font-size:3rem;color:var(--text-faint);opacity:0.5}
+/* ★ height 520 → 360, padding 36px 30px 32px → 28px 24px 24px */
+.slot-real{width:100%;height:360px;flex-shrink:0;padding:28px 24px 24px;background:var(--bg-card);display:flex;flex-direction:column;justify-content:flex-start;position:relative}
+.match-num{position:absolute;top:24px;right:28px;font-family:var(--ff-body);font-weight:800;font-size:1.6rem;color:var(--text-faint);letter-spacing:-0.03em;line-height:1}
+.match-head{font-family:var(--ff-body);font-weight:700;font-size:1.2rem;line-height:1.5;color:var(--text);letter-spacing:-0.02em;margin-bottom:16px;margin-top:40px}
+.match-body{font-size:0.85rem;line-height:1.85;color:var(--text-sub)}
 .match-body strong{color:var(--text);font-weight:700}
-
-/* ===== 슬롯머신 스핀 애니메이션 =====
-   초기: -2600px (slot-real 노출)
-   spinning: 더미 범위(-520px~0px) 빠르게 순환
-   landed: 다시 -2600px로 안착하며 바운스
-*/
-.match-grid.spinning .reel-slot{
-  animation:reel-spin 0.12s linear infinite;
-}
-@keyframes reel-spin{
-  0%{transform:translateY(0)}
-  100%{transform:translateY(-520px)}
-}
-
-/* 각 카드가 순서대로 멈춤: 위에서 내려오며 -2600px에 안착 + 바운스 */
+/* ★ reel-spin 360px */
+.match-grid.spinning .reel-slot{animation:reel-spin 0.12s linear infinite}
+@keyframes reel-spin{0%{transform:translateY(0)}100%{transform:translateY(-360px)}}
 .match-grid.landed-1 .match-card[data-idx="1"] .reel-slot,
 .match-grid.landed-2 .match-card[data-idx="2"] .reel-slot,
 .match-grid.landed-3 .match-card[data-idx="3"] .reel-slot,
-.match-grid.landed-4 .match-card[data-idx="4"] .reel-slot{
-  animation:reel-land 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
-}
-
-@keyframes reel-land{
-  0%{transform:translateY(-260px)}
-  55%{transform:translateY(-2650px)}
-  75%{transform:translateY(-2585px)}
-  90%{transform:translateY(-2610px)}
-  100%{transform:translateY(-2600px)}
-}
-
-/* 랜딩 순간 카드 바운스 */
+.match-grid.landed-4 .match-card[data-idx="4"] .reel-slot{animation:reel-land 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards}
+/* ★ reel-land 재계산 (기준 -1800px) */
+@keyframes reel-land{0%{transform:translateY(-180px)}55%{transform:translateY(-1830px)}75%{transform:translateY(-1775px)}90%{transform:translateY(-1810px)}100%{transform:translateY(-1800px)}}
 .match-grid.landed-1 .match-card[data-idx="1"],
 .match-grid.landed-2 .match-card[data-idx="2"],
 .match-grid.landed-3 .match-card[data-idx="3"],
-.match-grid.landed-4 .match-card[data-idx="4"]{
-  animation:card-thud 0.4s ease-out;
-}
-@keyframes card-thud{
-  0%,100%{transform:translateY(0)}
-  40%{transform:translateY(5px) scaleY(0.97)}
-  70%{transform:translateY(-2px) scaleY(1.02)}
-}
-
-/* ===== 4번째 정지 후 PERFECT MATCH 연출 ===== */
-.match-flash{
-  position:absolute;
-  inset:0;
-  border-radius:20px;
-  pointer-events:none;
-  opacity:0;
-  background:radial-gradient(circle at 50% 50%, rgba(45,134,89,0.4) 0%, rgba(45,134,89,0) 70%);
-  z-index:2;
-}
-
-.match-grid.matched .match-flash{
-  animation:match-flash 1.2s ease-out;
-}
-@keyframes match-flash{
-  0%{opacity:0;transform:scale(0.9)}
-  30%{opacity:1;transform:scale(1)}
-  100%{opacity:0;transform:scale(1.1)}
-}
-
-.match-grid.matched .match-card{
-  animation:match-glow 1.2s ease-out;
-  border-color:var(--green);
-}
-@keyframes match-glow{
-  0%{box-shadow:0 0 0 0 rgba(45,134,89,0)}
-  30%{box-shadow:0 0 32px 4px rgba(45,134,89,0.35)}
-  100%{box-shadow:var(--shadow)}
-}
-
-/* 폭죽 파티클 */
-.poko-confetti{
-  position:absolute;
-  top:50%;left:50%;
-  width:0;height:0;
-  pointer-events:none;
-  z-index:3;
-}
-.poko-confetti span{
-  position:absolute;
-  top:0;left:0;
-  width:8px;height:8px;
-  border-radius:50%;
-  opacity:0;
-}
-.match-grid.matched .poko-confetti span{
-  animation:confetti-fly 1s cubic-bezier(0.22,0.61,0.36,1) forwards;
-}
+.match-grid.landed-4 .match-card[data-idx="4"]{animation:card-thud 0.4s ease-out}
+@keyframes card-thud{0%,100%{transform:translateY(0)}40%{transform:translateY(5px) scaleY(0.97)}70%{transform:translateY(-2px) scaleY(1.02)}}
+.match-flash{position:absolute;inset:0;border-radius:20px;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 50%,rgba(45,134,89,0.4) 0%,rgba(45,134,89,0) 70%);z-index:2}
+.match-grid.matched .match-flash{animation:match-flash 1.2s ease-out}
+@keyframes match-flash{0%{opacity:0;transform:scale(0.9)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
+.match-grid.matched .match-card{animation:match-glow 1.2s ease-out;border-color:var(--green)}
+@keyframes match-glow{0%{box-shadow:0 0 0 0 rgba(45,134,89,0)}30%{box-shadow:0 0 32px 4px rgba(45,134,89,0.35)}100%{box-shadow:var(--shadow)}}
+.poko-confetti{position:absolute;top:50%;left:50%;width:0;height:0;pointer-events:none;z-index:3}
+.poko-confetti span{position:absolute;top:0;left:0;width:8px;height:8px;border-radius:50%;opacity:0}
+.match-grid.matched .poko-confetti span{animation:confetti-fly 1s cubic-bezier(0.22,0.61,0.36,1) forwards}
 .poko-confetti span:nth-child(1){background:var(--green);--tx:-60px;--ty:-70px;animation-delay:0s}
 .poko-confetti span:nth-child(2){background:#e8b591;--tx:60px;--ty:-70px;animation-delay:0.04s}
 .poko-confetti span:nth-child(3){background:var(--green-deep);--tx:-80px;--ty:10px;animation-delay:0.08s}
@@ -565,609 +116,110 @@ button{cursor:none;background:none;border:none;color:inherit;font-family:inherit
 .poko-confetti span:nth-child(6){background:#a4c9a0;--tx:40px;--ty:70px;animation-delay:0.06s}
 .poko-confetti span:nth-child(7){background:var(--green);--tx:0;--ty:-80px;width:6px;height:6px;animation-delay:0.1s}
 .poko-confetti span:nth-child(8){background:#e8b591;--tx:0;--ty:80px;width:6px;height:6px;animation-delay:0.14s}
-
-@keyframes confetti-fly{
-  0%{transform:translate(0,0) scale(0);opacity:0}
-  20%{opacity:1;transform:translate(calc(var(--tx)*0.3),calc(var(--ty)*0.3)) scale(1.2)}
-  100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}
-}
-
-/* PERFECT MATCH 뱃지 */
-.match-success{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  background:var(--green);
-  color:#fff;
-  padding:14px 24px;
-  border-radius:100px;
-  font-family:var(--ff-mono);
-  font-size:0.85rem;
-  font-weight:700;
-  letter-spacing:0.1em;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:0 10px 40px rgba(45,134,89,0.4);
-  opacity:0;
-  pointer-events:none;
-  z-index:10;
-}
-.match-success-icon{
-  display:inline-flex;
-  align-items:center;justify-content:center;
-  width:22px;height:22px;
-  background:#fff;
-  color:var(--green);
-  border-radius:50%;
-  font-size:0.9rem;
-  font-weight:900;
-}
-.match-grid.matched .match-success{
-  animation:success-pop 2s cubic-bezier(0.34,1.56,0.64,1) forwards;
-}
-@keyframes success-pop{
-  0%{transform:translate(-50%,-50%) scale(0);opacity:0}
-  15%{transform:translate(-50%,-50%) scale(1.15);opacity:1}
-  25%{transform:translate(-50%,-50%) scale(1);opacity:1}
-  80%{transform:translate(-50%,-50%) scale(1);opacity:1}
-  100%{transform:translate(-50%,-50%) scale(0.9);opacity:0}
-}
-
-/* ===== ABOUT SECTION ===== */
-.about-grid{
-  display:grid;grid-template-columns:1fr 1.1fr;
-  gap:80px;align-items:start;
-}
-.about-body p{
-  font-size:0.98rem;line-height:2;
-  color:var(--text-sub);
-  margin-bottom:28px;
-}
+@keyframes confetti-fly{0%{transform:translate(0,0) scale(0);opacity:0}20%{opacity:1;transform:translate(calc(var(--tx)*0.3),calc(var(--ty)*0.3)) scale(1.2)}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+.match-success{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:var(--green);color:#fff;padding:14px 24px;border-radius:100px;font-family:var(--ff-mono);font-size:0.85rem;font-weight:700;letter-spacing:0.1em;display:flex;align-items:center;gap:10px;box-shadow:0 10px 40px rgba(45,134,89,0.4);opacity:0;pointer-events:none;z-index:10}
+.match-success-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#fff;color:var(--green);border-radius:50%;font-size:0.9rem;font-weight:900}
+.match-grid.matched .match-success{animation:success-pop 2s cubic-bezier(0.34,1.56,0.64,1) forwards}
+@keyframes success-pop{0%{transform:translate(-50%,-50%) scale(0);opacity:0}15%{transform:translate(-50%,-50%) scale(1.15);opacity:1}25%{transform:translate(-50%,-50%) scale(1);opacity:1}80%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-50%) scale(0.9);opacity:0}}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
+.about-body p{font-size:0.98rem;line-height:2;color:var(--text-sub);margin-bottom:28px}
 .about-body strong{color:var(--text);font-weight:700}
 .about-body .hl{color:var(--green);font-weight:700}
-
 .career-timeline{display:flex;flex-direction:column;gap:0}
-.career-item{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:24px 28px;
-  margin-bottom:12px;
-  position:relative;
-  transition:all 0.25s;
-}
-.career-item:hover{
-  border-color:var(--green);
-  transform:translateX(4px);
-  box-shadow:var(--shadow);
-}
-.career-item::before{
-  content:'';position:absolute;left:-7px;top:32px;
-  width:12px;height:12px;
-  background:var(--green);
-  border:3px solid var(--bg);
-  border-radius:50%;
-}
-.career-period{
-  font-family:var(--ff-mono);font-size:0.68rem;
-  color:var(--green);font-weight:700;
-  letter-spacing:0.05em;margin-bottom:6px;
-}
-.career-title{
-  font-size:1.02rem;font-weight:700;
-  color:var(--text);margin-bottom:4px;
-}
-.career-role{
-  font-family:var(--ff-mono);font-size:0.65rem;
-  color:var(--text-dim);letter-spacing:0.08em;
-  text-transform:uppercase;margin-bottom:12px;
-}
-.career-desc{
-  font-size:0.87rem;color:var(--text-sub);
-  line-height:1.75;
-}
-
-/* ===== IMPACT NUMBERS ===== */
+.career-item{background:var(--bg-card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;margin-bottom:12px;position:relative;transition:all 0.25s}
+.career-item:hover{border-color:var(--green);transform:translateX(4px);box-shadow:var(--shadow)}
+.career-item::before{content:'';position:absolute;left:-7px;top:32px;width:12px;height:12px;background:var(--green);border:3px solid var(--bg);border-radius:50%}
+.career-period{font-family:var(--ff-mono);font-size:0.68rem;color:var(--green);font-weight:700;letter-spacing:0.05em;margin-bottom:6px}
+.career-title{font-size:1.02rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.career-role{font-family:var(--ff-mono);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px}
+.career-desc{font-size:0.87rem;color:var(--text-sub);line-height:1.75}
 .impact-wrap{background:var(--bg-alt)}
-.impact-grid{
-  max-width:1400px;margin:0 auto;
-  padding:80px 40px;
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:24px;
-}
-.impact-cell{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:36px 28px;
-  transition:all 0.3s;
-  position:relative;overflow:hidden;
-}
-.impact-cell:hover{
-  border-color:var(--green);
-  transform:translateY(-4px);
-  box-shadow:var(--shadow);
-}
+.impact-grid{max-width:1400px;margin:0 auto;padding:56px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.impact-cell{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;padding:36px 28px;transition:all 0.3s;position:relative;overflow:hidden}
+.impact-cell:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:var(--shadow)}
 .impact-cell::after{display:none}
-.impact-sub{
-  font-family:var(--ff-mono);font-size:0.62rem;
-  letter-spacing:0.12em;color:var(--text-dim);
-  text-transform:uppercase;margin-bottom:12px;
-  font-weight:700;
-}
-.impact-num{
-  font-family:var(--ff-body);font-weight:800;
-  font-size:3.5rem;line-height:1;
-  color:var(--green);margin-bottom:14px;
-  letter-spacing:-0.04em;
-}
+.impact-sub{font-family:var(--ff-mono);font-size:0.62rem;letter-spacing:0.12em;color:var(--text-dim);text-transform:uppercase;margin-bottom:12px;font-weight:700}
+.impact-num{font-family:var(--ff-body);font-weight:800;font-size:3.5rem;line-height:1;color:var(--green);margin-bottom:14px;letter-spacing:-0.04em}
 .impact-num span{color:var(--green)}
-.impact-desc{
-  font-size:0.85rem;color:var(--text-sub);
-  line-height:1.7;
-}
-
-/* ===== PROJECTS ===== */
-.proj-grid{
-  display:grid;grid-template-columns:1fr;gap:24px;
-}
-.proj-card{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:24px;
-  overflow:hidden;
-  transition:all 0.3s;
-  display:grid;grid-template-columns:1fr 1.2fr;
-}
+.impact-desc{font-size:0.85rem;color:var(--text-sub);line-height:1.7}
+.proj-grid{display:grid;grid-template-columns:1fr;gap:24px}
+.proj-card{background:var(--bg-card);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:all 0.3s;display:grid;grid-template-columns:1fr 1.2fr}
 .proj-card:nth-child(even){grid-template-columns:1.2fr 1fr}
 .proj-card:nth-child(even) .proj-image{order:2}
 .proj-card:nth-child(even) .proj-content{order:1}
-.proj-card:hover{
-  border-color:var(--green);
-  box-shadow:var(--shadow-lg);
-}
-
-.proj-image{
-  background:var(--bg-alt);
-  min-height:320px;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
-.proj-image-placeholder{
-  width:100%;height:100%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;
-  background:
-    linear-gradient(135deg,var(--green-soft) 0%,var(--peach) 100%);
-  color:var(--green-deep);
-}
-[data-theme="dark"] .proj-image-placeholder{color:var(--green-bright)}
-.proj-image-placeholder svg{width:48px;height:48px;opacity:0.6}
-.proj-image-placeholder span{
-  font-family:var(--ff-mono);font-size:0.68rem;
-  letter-spacing:0.15em;text-transform:uppercase;
-  font-weight:700;
-}
-
-.proj-content{
-  padding:40px 36px;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.proj-meta{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:16px;
-}
-.proj-num{
-  font-family:var(--ff-mono);font-size:0.72rem;
-  background:var(--green);color:#fff;
-  padding:4px 10px;border-radius:6px;
-  font-weight:700;letter-spacing:0.05em;
-}
-.proj-year{
-  font-family:var(--ff-mono);font-size:0.72rem;
-  color:var(--text-dim);letter-spacing:0.1em;
-  font-weight:700;
-}
-.proj-title{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:1.5rem;line-height:1.35;
-  color:var(--text);margin-bottom:10px;
-  letter-spacing:-0.02em;
-}
-.proj-role{
-  font-family:var(--ff-mono);font-size:0.68rem;
-  color:var(--green);letter-spacing:0.08em;
-  font-weight:700;margin-bottom:18px;
-  text-transform:uppercase;
-}
-.proj-desc{
-  font-size:0.9rem;color:var(--text-sub);
-  line-height:1.85;margin-bottom:20px;
-}
+.proj-card:hover{border-color:var(--green);box-shadow:var(--shadow-lg)}
+.proj-image{background:var(--bg-alt);min-height:320px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.proj-content{padding:40px 36px;display:flex;flex-direction:column;justify-content:center}
+.proj-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.proj-num{font-family:var(--ff-mono);font-size:0.72rem;background:var(--green);color:#fff;padding:4px 10px;border-radius:6px;font-weight:700;letter-spacing:0.05em}
+.proj-year{font-family:var(--ff-mono);font-size:0.72rem;color:var(--text-dim);letter-spacing:0.1em;font-weight:700}
+.proj-title{font-family:var(--ff-display);font-weight:700;font-size:1.5rem;line-height:1.35;color:var(--text);margin-bottom:10px;letter-spacing:-0.02em}
+.proj-role{font-family:var(--ff-mono);font-size:0.68rem;color:var(--green);letter-spacing:0.08em;font-weight:700;margin-bottom:18px;text-transform:uppercase}
+.proj-desc{font-size:0.9rem;color:var(--text-sub);line-height:1.85;margin-bottom:20px}
 .proj-tags{display:flex;flex-wrap:wrap;gap:8px}
-.proj-tag{
-  font-family:var(--ff-mono);font-size:0.62rem;
-  padding:5px 12px;border-radius:6px;
-  background:var(--bg);
-  color:var(--text-sub);
-  border:1px solid var(--line);
-  letter-spacing:0.05em;font-weight:500;
-}
-
-/* ===== AI WORKFLOW ===== */
+.proj-tag{font-family:var(--ff-mono);font-size:0.62rem;padding:5px 12px;border-radius:6px;background:var(--bg);color:var(--text-sub);border:1px solid var(--line);letter-spacing:0.05em;font-weight:500}
 .ai-section{position:relative}
-.ai-header{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:end;margin-bottom:80px;
-}
-.ai-intro{
-  font-size:1.02rem;line-height:2;
-  color:var(--text-sub);
-}
-.ai-intro strong{color:var(--text);font-weight:700}
-
-.tool-stack{
-  margin-bottom:80px;
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:48px;
-}
-.tool-stack-label{
-  font-family:var(--ff-mono);font-size:0.68rem;
-  color:var(--green);font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  margin-bottom:24px;
-}
-.tool-stack-title{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:1.8rem;line-height:1.4;
-  color:var(--text);margin-bottom:32px;
-  letter-spacing:-0.02em;
-}
-.tool-stack-title em{color:var(--green);font-style:normal}
-.tool-pills{display:flex;flex-wrap:wrap;gap:10px}
-.tool-pill{
-  padding:10px 18px;
-  background:var(--bg);
-  border:1px solid var(--line);
-  border-radius:100px;
-  font-size:0.85rem;font-weight:600;
-  color:var(--text);
-  display:inline-flex;align-items:center;gap:8px;
-  transition:all 0.2s;
-}
-.tool-pill:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
-.tool-pill-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);
-}
-
-.ai-workflow-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:20px;
-}
-.ai-block{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:32px 28px;
-  transition:all 0.25s;
-  display:flex;flex-direction:column;
-}
-.ai-block:hover{
-  border-color:var(--green);
-  transform:translateY(-3px);
-  box-shadow:var(--shadow);
-}
-.ai-block-num{
-  font-family:var(--ff-mono);font-size:0.65rem;
-  color:var(--green);letter-spacing:0.12em;
-  font-weight:700;margin-bottom:12px;
-}
-.ai-block-title{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:1.15rem;line-height:1.4;
-  color:var(--text);margin-bottom:16px;
-  letter-spacing:-0.01em;
-}
-.ai-block-desc{
-  font-size:0.88rem;color:var(--text-sub);
-  line-height:1.85;
-}
+.ai-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:80px}
+.ai-workflow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.ai-block{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;padding:32px 28px;transition:all 0.25s;display:flex;flex-direction:column}
+.ai-block:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:var(--shadow)}
+.ai-block-num{font-family:var(--ff-mono);font-size:0.65rem;color:var(--green);letter-spacing:0.12em;font-weight:700;margin-bottom:12px}
+.ai-block-title{font-family:var(--ff-display);font-weight:700;font-size:1.15rem;line-height:1.4;color:var(--text);margin-bottom:16px;letter-spacing:-0.01em}
+.ai-block-desc{font-size:0.88rem;color:var(--text-sub);line-height:1.85}
 .ai-block-desc strong{color:var(--text);font-weight:700}
-
-.transform-section{
-  margin-top:80px;
-  background:linear-gradient(135deg,var(--green-soft) 0%,var(--peach) 100%);
-  border-radius:32px;
-  padding:56px 48px;
-  position:relative;overflow:hidden;
-}
-[data-theme="dark"] .transform-section{
-  background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-alt) 100%);
-  border:1px solid var(--line);
-}
-.transform-title{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:1.8rem;color:var(--text);
-  margin-bottom:40px;letter-spacing:-0.02em;
-  text-align:center;
-}
-.transform-title em{color:var(--green);font-style:normal}
-.transform-grid{
-  display:grid;grid-template-columns:1fr auto 1fr;
-  gap:32px;align-items:center;
-}
-.transform-col{
-  background:var(--bg-card);
-  border-radius:20px;padding:32px;
-  border:1px solid var(--line);
-}
-.transform-col.after{
-  border:2px solid var(--green);
-  background:var(--bg-card);
-}
-.transform-label{
-  display:inline-block;
-  font-family:var(--ff-mono);font-size:0.6rem;font-weight:700;
-  padding:4px 12px;border-radius:6px;
-  margin-bottom:20px;
-  letter-spacing:0.12em;
-}
-.transform-col:not(.after) .transform-label{
-  background:var(--text-dim);color:var(--bg);
-}
-.transform-col.after .transform-label{
-  background:var(--green);color:#fff;
-}
-.transform-items{display:flex;flex-direction:column;gap:14px}
-.transform-item{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:0.88rem;line-height:1.6;
-  color:var(--text-sub);
-}
-.transform-col.after .transform-item{color:var(--text);font-weight:500}
-.transform-item::before{
-  content:'';width:6px;height:6px;border-radius:50%;
-  background:var(--text-dim);margin-top:8px;flex-shrink:0;
-}
-.transform-col.after .transform-item::before{background:var(--green)}
-.transform-arrow{
-  font-size:2rem;color:var(--green);
-  font-family:var(--ff-display);font-weight:700;
-}
-
-/* ===== EDU + PROFILE ===== */
-.edu-grid{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:24px;
-}
-.edu-card{
-  background:var(--bg-card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:32px 28px;
-  transition:all 0.25s;
-}
-.edu-card:hover{
-  border-color:var(--green);
-  box-shadow:var(--shadow);
-}
-.edu-badge{
-  display:inline-block;
-  font-family:var(--ff-mono);font-size:0.6rem;font-weight:700;
-  background:var(--green-soft);
-  color:var(--green-deep);
-  padding:5px 12px;border-radius:6px;
-  letter-spacing:0.1em;text-transform:uppercase;
-  margin-bottom:20px;
-}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.edu-card{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;padding:32px 28px;transition:all 0.25s}
+.edu-card:hover{border-color:var(--green);box-shadow:var(--shadow)}
+.edu-badge{display:inline-block;font-family:var(--ff-mono);font-size:0.6rem;font-weight:700;background:var(--green-soft);color:var(--green-deep);padding:5px 12px;border-radius:6px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
 [data-theme="dark"] .edu-badge{color:var(--green-bright)}
-.edu-title{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:1.1rem;color:var(--text);
-  margin-bottom:8px;letter-spacing:-0.01em;
-}
-.edu-period{
-  font-family:var(--ff-mono);font-size:0.68rem;
-  color:var(--text-dim);letter-spacing:0.05em;
-  margin-bottom:14px;
-}
-.edu-detail{
-  font-size:0.87rem;color:var(--text-sub);
-  line-height:1.8;
-}
+.edu-title{font-family:var(--ff-display);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:8px;letter-spacing:-0.01em}
+.edu-period{font-family:var(--ff-mono);font-size:0.68rem;color:var(--text-dim);letter-spacing:0.05em;margin-bottom:14px}
+.edu-detail{font-size:0.87rem;color:var(--text-sub);line-height:1.8}
 .edu-detail span{display:block}
-
-.edu-sub-item{
-  padding-top:20px;margin-top:20px;
-  border-top:1px dashed var(--line);
-}
+.edu-sub-item{padding-top:20px;margin-top:20px;border-top:1px dashed var(--line)}
 .edu-sub-item:first-child{padding-top:0;margin-top:0;border-top:none}
-.edu-sub-label{
-  font-family:var(--ff-mono);font-size:0.6rem;
-  color:var(--green);letter-spacing:0.1em;
-  font-weight:700;margin-bottom:6px;
-  text-transform:uppercase;
-}
-
+.edu-sub-label{font-family:var(--ff-mono);font-size:0.6rem;color:var(--green);letter-spacing:0.1em;font-weight:700;margin-bottom:6px;text-transform:uppercase}
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
-.skill-tag{
-  font-family:var(--ff-mono);font-size:0.65rem;
-  padding:4px 10px;
-  background:var(--bg);
-  border:1px solid var(--line);
-  border-radius:6px;
-  color:var(--text-sub);
-  transition:all 0.2s;font-weight:500;
-}
+.skill-tag{font-family:var(--ff-mono);font-size:0.65rem;padding:4px 10px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--text-sub);transition:all 0.2s;font-weight:500}
 .skill-tag:hover{border-color:var(--green);color:var(--green)}
-
-.profile-info{
-  display:flex;flex-direction:column;gap:0;
-  border-top:1px solid var(--line);
-}
-.profile-row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 0;border-bottom:1px solid var(--line);
-  font-size:0.87rem;
-}
-.profile-key{
-  font-family:var(--ff-mono);font-size:0.65rem;
-  color:var(--text-dim);letter-spacing:0.08em;
-  font-weight:700;text-transform:uppercase;
-}
-.profile-val{
-  font-weight:700;color:var(--text);
-}
-
-/* ===== CONTACT ===== */
-.contact-section{
-  background:var(--text);
-  color:var(--bg);
-  padding:120px 40px 60px;
-  position:relative;overflow:hidden;
-}
+.profile-info{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.profile-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:0.87rem}
+.profile-key{font-family:var(--ff-mono);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.08em;font-weight:700;text-transform:uppercase}
+.profile-val{font-weight:700;color:var(--text)}
+.contact-section{background:var(--text);color:var(--bg);padding:120px 40px 60px;position:relative;overflow:hidden}
 .contact-inner{max-width:1400px;margin:0 auto;position:relative;z-index:2}
-.contact-bg{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 80% 20%,rgba(45,134,89,0.15) 0%,transparent 50%);
-  pointer-events:none;
-}
-
-.contact-label{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;
-  color:var(--green-bright);
-  background:rgba(74,179,128,0.15);
-  padding:8px 14px;border-radius:100px;
-  letter-spacing:0.15em;margin-bottom:24px;
-  text-transform:uppercase;
-}
-
-.contact-title{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:clamp(2.5rem,6vw,5rem);
-  line-height:1.1;color:var(--bg);
-  margin-bottom:60px;letter-spacing:-0.02em;
-}
+.contact-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(45,134,89,0.15) 0%,transparent 50%);pointer-events:none}
+.contact-label{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:0.68rem;font-weight:700;color:var(--green-bright);background:rgba(74,179,128,0.15);padding:8px 14px;border-radius:100px;letter-spacing:0.15em;margin-bottom:24px;text-transform:uppercase}
+.contact-title{font-family:var(--ff-display);font-weight:700;font-size:clamp(2.5rem,6vw,5rem);line-height:1.1;color:var(--bg);margin-bottom:60px;letter-spacing:-0.02em}
 .contact-title em{color:var(--green-bright);font-style:normal}
-
-.contact-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:16px;margin-bottom:60px;
-}
-.contact-card{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:18px;
-  padding:28px 24px;
-  transition:all 0.25s;
-}
-.contact-card:hover{
-  background:rgba(74,179,128,0.1);
-  border-color:var(--green-bright);
-  transform:translateY(-3px);
-}
-.cc-label{
-  font-family:var(--ff-mono);font-size:0.62rem;
-  color:var(--green-bright);letter-spacing:0.12em;
-  font-weight:700;margin-bottom:14px;
-  text-transform:uppercase;
-}
-.cc-value{
-  font-size:1.02rem;font-weight:700;
-  color:var(--bg);line-height:1.4;
-}
-.cc-sub{
-  font-size:0.78rem;color:rgba(255,255,255,0.5);
-  margin-top:6px;
-}
-
-.contact-footer{
-  display:flex;justify-content:space-between;align-items:center;
-  padding-top:40px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  flex-wrap:wrap;gap:20px;
-}
-.contact-copy{
-  font-family:var(--ff-mono);font-size:0.72rem;
-  color:rgba(255,255,255,0.5);letter-spacing:0.05em;
-}
-.contact-end{
-  font-family:var(--ff-display);font-weight:700;
-  font-size:1.1rem;color:var(--green-bright);
-  letter-spacing:0.02em;
-}
-
-/* ===== FAB ===== */
-.fab-group{
-  position:fixed;bottom:32px;right:32px;
-  z-index:300;
-  display:flex;flex-direction:column;gap:10px;
-}
-.fab{
-  background:var(--green);
-  color:#fff;
-  padding:12px 20px;
-  border-radius:100px;
-  font-size:0.82rem;font-weight:600;
-  display:flex;align-items:center;gap:8px;
-  box-shadow:var(--shadow-lg);
-  transition:all 0.25s;
-  white-space:nowrap;
-}
-.fab:hover{
-  background:var(--green-deep);
-  transform:translateY(-2px) scale(1.03);
-}
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:60px}
+.contact-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:28px 24px;transition:all 0.25s}
+.contact-card:hover{background:rgba(74,179,128,0.1);border-color:var(--green-bright);transform:translateY(-3px)}
+.cc-label{font-family:var(--ff-mono);font-size:0.62rem;color:var(--green-bright);letter-spacing:0.12em;font-weight:700;margin-bottom:14px;text-transform:uppercase}
+.cc-value{font-size:1.02rem;font-weight:700;color:var(--bg);line-height:1.4}
+.cc-sub{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:6px}
+.contact-footer{display:flex;justify-content:space-between;align-items:center;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;gap:20px}
+.contact-copy{font-family:var(--ff-mono);font-size:0.72rem;color:rgba(255,255,255,0.5);letter-spacing:0.05em}
+.contact-end{font-family:var(--ff-display);font-weight:700;font-size:1.1rem;color:var(--green-bright);letter-spacing:0.02em}
+.fab-group{position:fixed;bottom:32px;right:32px;z-index:300;display:flex;flex-direction:column;gap:10px}
+.fab{background:var(--green);color:#fff;padding:12px 20px;border-radius:100px;font-size:0.82rem;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-lg);transition:all 0.25s;white-space:nowrap}
+.fab:hover{background:var(--green-deep);transform:translateY(-2px) scale(1.03)}
 .fab svg{width:14px;height:14px}
-.fab-top{
-  background:var(--bg-card);
-  color:var(--text);
-  border:1px solid var(--line);
-  padding:12px;
-  width:44px;height:44px;
-  border-radius:50%;
-  align-self:flex-end;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:translateY(20px);
-  pointer-events:none;
-}
+.fab-top{background:var(--bg-card);color:var(--text);border:1px solid var(--line);padding:12px;width:44px;height:44px;border-radius:50%;align-self:flex-end;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);pointer-events:none}
 .fab-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 .fab-top:hover{border-color:var(--green);color:var(--green)}
-
-/* ===== REVEAL ANIMATIONS ===== */
-.reveal{
-  opacity:0;transform:translateY(30px);
-  transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);
-}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
 .reveal.in{opacity:1;transform:translateY(0)}
-.reveal-d1{transition-delay:0.1s}
-.reveal-d2{transition-delay:0.2s}
-.reveal-d3{transition-delay:0.3s}
-
-/* ===== RESPONSIVE ===== */
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}
+/* ★ 1024px: 340px 기준 */
 @media(max-width:1024px){
   .match-grid{grid-template-columns:repeat(2,1fr)}
-  .match-card{height:480px}
-  .slot-dummy,.slot-real{height:480px}
-  .reel-slot{transform:translateY(-2400px)}
-  @keyframes reel-spin{
-    0%{transform:translateY(0)}
-    100%{transform:translateY(-480px)}
-  }
-  @keyframes reel-land{
-    0%{transform:translateY(-240px)}
-    60%{transform:translateY(-2440px)}
-    80%{transform:translateY(-2380px)}
-    100%{transform:translateY(-2400px)}
-  }
+  .match-card{height:340px}
+  .slot-dummy,.slot-real{height:340px}
+  .reel-slot{transform:translateY(-1700px)}
+  @keyframes reel-spin{0%{transform:translateY(0)}100%{transform:translateY(-340px)}}
+  @keyframes reel-land{0%{transform:translateY(-170px)}60%{transform:translateY(-1730px)}80%{transform:translateY(-1680px)}100%{transform:translateY(-1700px)}}
   .about-grid,.ai-header,.transform-grid{grid-template-columns:1fr}
-  .transform-arrow{transform:rotate(90deg);margin:0 auto}
   .ai-workflow-grid{grid-template-columns:1fr}
   .proj-card,.proj-card:nth-child(even){grid-template-columns:1fr}
   .proj-card:nth-child(even) .proj-image{order:0}
@@ -1178,564 +230,180 @@ button{cursor:none;background:none;border:none;color:inherit;font-family:inherit
   body{cursor:auto}
   .cursor-rabbit,.cursor-dot{display:none}
   .section{padding:80px 24px}
-  .hero{padding:100px 24px 40px}
+  .hero{padding:100px 24px 32px}
   .nav{padding:0 20px}
-  .impact-grid{padding:60px 24px}
+  .impact-grid{padding:40px 24px}
   .contact-section{padding:80px 24px 40px}
   .fab-group{bottom:20px;right:20px}
   .fab{padding:10px 16px;font-size:0.76rem}
 }
+/* ★ 640px: 320px 기준 */
 @media(max-width:640px){
   .match-grid{grid-template-columns:1fr}
-  .match-card{height:440px}
-  .slot-dummy,.slot-real{height:440px}
-  .reel-slot{transform:translateY(-2200px)}
-  @keyframes reel-spin{
-    0%{transform:translateY(0)}
-    100%{transform:translateY(-440px)}
-  }
-  @keyframes reel-land{
-    0%{transform:translateY(-220px)}
-    60%{transform:translateY(-2240px)}
-    80%{transform:translateY(-2180px)}
-    100%{transform:translateY(-2200px)}
-  }
+  .match-card{height:320px}
+  .slot-dummy,.slot-real{height:320px}
+  .reel-slot{transform:translateY(-1600px)}
+  @keyframes reel-spin{0%{transform:translateY(0)}100%{transform:translateY(-320px)}}
+  @keyframes reel-land{0%{transform:translateY(-160px)}60%{transform:translateY(-1630px)}80%{transform:translateY(-1580px)}100%{transform:translateY(-1600px)}}
   .impact-grid,.contact-grid{grid-template-columns:1fr}
   .nav-tag{display:none}
   .match-body{font-size:1rem;line-height:1.9}
   .match-head{font-size:1.25rem}
 }
-
-@media print{
-  .nav,.fab-group,.cursor-rabbit,.cursor-dot,.theme-toggle{display:none}
-  body{cursor:auto}
-  .section{page-break-inside:avoid}
-}
+@media print{.nav,.fab-group,.cursor-rabbit,.cursor-dot,.theme-toggle{display:none}body{cursor:auto}.section{page-break-inside:avoid}}
 </style>
 </head>
 <body>
-
-<!-- CUSTOM RABBIT CURSOR -->
 <div class="cursor-rabbit" id="rabbit">
   <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="24" cy="32" rx="13" ry="12" fill="#e89c9c"/>
-    <ellipse cx="16" cy="15" rx="3.5" ry="8" fill="#e89c9c"/>
-    <ellipse cx="32" cy="15" rx="3.5" ry="8" fill="#e89c9c"/>
-    <ellipse cx="16" cy="16" rx="1.5" ry="5" fill="#f5b5b5"/>
-    <ellipse cx="32" cy="16" rx="1.5" ry="5" fill="#f5b5b5"/>
-    <ellipse cx="24" cy="34" rx="8" ry="6" fill="#b86a5c"/>
-    <circle cx="20" cy="28" r="2" fill="#fff"/>
-    <circle cx="28" cy="28" r="2" fill="#fff"/>
-    <circle cx="20.3" cy="28.3" r="1" fill="#1a1a1a"/>
-    <circle cx="28.3" cy="28.3" r="1" fill="#1a1a1a"/>
-    <path d="M22 36 Q24 38 26 36" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <circle cx="20" cy="33" r="0.7" fill="#8a4030" opacity="0.6"/>
-    <circle cx="28" cy="33" r="0.7" fill="#8a4030" opacity="0.6"/>
-    <circle cx="24" cy="37" r="0.6" fill="#8a4030" opacity="0.6"/>
+    <ellipse cx="24" cy="32" rx="13" ry="12" fill="#e89c9c"/><ellipse cx="16" cy="15" rx="3.5" ry="8" fill="#e89c9c"/><ellipse cx="32" cy="15" rx="3.5" ry="8" fill="#e89c9c"/><ellipse cx="16" cy="16" rx="1.5" ry="5" fill="#f5b5b5"/><ellipse cx="32" cy="16" rx="1.5" ry="5" fill="#f5b5b5"/><ellipse cx="24" cy="34" rx="8" ry="6" fill="#b86a5c"/><circle cx="20" cy="28" r="2" fill="#fff"/><circle cx="28" cy="28" r="2" fill="#fff"/><circle cx="20.3" cy="28.3" r="1" fill="#1a1a1a"/><circle cx="28.3" cy="28.3" r="1" fill="#1a1a1a"/><path d="M22 36 Q24 38 26 36" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="33" r="0.7" fill="#8a4030" opacity="0.6"/><circle cx="28" cy="33" r="0.7" fill="#8a4030" opacity="0.6"/><circle cx="24" cy="37" r="0.6" fill="#8a4030" opacity="0.6"/>
   </svg>
 </div>
 <div class="cursor-dot" id="dot"></div>
-
-<!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">
-    <div class="nav-logo-mark">BSH</div>
-    <span>배수현</span>
-  </div>
+  <div class="nav-logo"><div class="nav-logo-mark">BSH</div><span>배수현</span></div>
   <ul class="nav-links">
-    <li><a href="#home">소개</a></li>
-    <li><a href="#match">지원동기</a></li>
-    <li><a href="#about">자기소개</a></li>
-    <li><a href="#projects">프로젝트</a></li>
-    <li><a href="#ai">AI 워크플로우</a></li>
-    <li><a href="#profile">요약정보</a></li>
-    <li><a href="#contact">컨택</a></li>
+    <li><a href="#home">소개</a></li><li><a href="#match">기여방향</a></li><li><a href="#about">자기소개</a></li><li><a href="#projects">프로젝트</a></li><li><a href="#ai">AI 워크플로우</a></li><li><a href="#profile">프로필요약</a></li><li><a href="#contact">컨택</a></li>
   </ul>
   <div class="nav-right">
     <span class="nav-tag">트리노드 UIUX셀 지원</span>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="테마 전환">
-      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"/>
-        <line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-      </svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
   </div>
 </nav>
-
-<!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grain"></div>
-
+  <div class="hero-bg"></div><div class="hero-grain"></div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-badge reveal">
-        <span class="hero-badge-dot"></span>
-        TREENOD · UIUX CELL · AI DESIGNER · 2026
-      </div>
-      <h1 class="hero-title reveal reveal-d1">
-        15년의 브랜딩 인사이트<br>
-        <span class="hero-title-highlight">AI라는 엔진</span>을 달다.
-      </h1>
+      <div class="hero-badge reveal"><span class="hero-badge-dot"></span>TREENOD · UIUX CELL · AI DESIGNER · 2026</div>
+      <h1 class="hero-title reveal reveal-d1">브랜딩 인사이트,<br><span class="hero-title-highlight">AI라는 엔진</span>을 달다.</h1>
       <div class="hero-name-row reveal reveal-d2">
-        <div class="hero-name">배수현 <small><small>디자이너<small></small></div>
+        <div class="hero-name">배수현 <small><small>디자이너</small></small></div>
         <div class="hero-name-en">BAE SU HYUN · UIUX · AI Designer</div>
       </div>
-      <p class="hero-tagline reveal reveal-d2">
-        <strong>AI와 역할을 나누고</strong>, 
-        <strong>팀 전체가 함께 성장하는 변화</strong>를 만드는 디자이너.<br>
-        <strong>15년의 브랜딩 내공</strong>과 <strong>10개 이상의 AI 툴</strong>을 실무 워크플로우에 활용한 경험으로, 
-        포코 IP 세계관 구축과 생산성 혁신에 기여하겠습니다.
-      </p>
-
+      <p class="hero-tagline reveal reveal-d2">15년간 축적한 <strong>브랜딩 실무 역량 </strong>과 <strong>AI를 활용한 워크플로우 적용 경험 </strong>을 바탕으로, 팀의 업무 효율과 결과물의 완성도를 함께 높이겠습니다.</p>
     </div>
   </div>
 </section>
-
-<!-- IMPACT NUMBERS -->
 <div class="impact-wrap">
   <div class="impact-grid">
-    <div class="impact-cell reveal">
-      <div class="impact-sub">Years of Experience</div>
-      <div class="impact-num">15<span>Y</span></div>
-      <div class="impact-desc">뷰티 브랜드부터 공공 브랜딩까지,<br>시장의 선택을 이끌어온 15년</div>
-    </div>
-    <div class="impact-cell reveal reveal-d1">
-      <div class="impact-sub">Final Selection</div>
-      <div class="impact-num">NO<span>.1</span></div>
-      <div class="impact-desc">주요 프로젝트 최종 채택률<br>압도적 1위</div>
-    </div>
-    <div class="impact-cell reveal reveal-d2">
-      <div class="impact-sub">AI Tools in Workflow</div>
-      <div class="impact-num" style="font-size:90px; line-height:0.8; transform:translateY(-6px);">∞</div>
-      <div class="impact-desc">AI로 날개를 단,<br>한계 없는 비주얼 익스텐션</div>
-    </div>
-    <div class="impact-cell reveal reveal-d3">
-      <div class="impact-sub">End-to-End System</div>
-      <div class="impact-num">100<span>%</span></div>
-      <div class="impact-desc">기획·디자인·매뉴얼까지,<br>브랜드 시스템 완결성</div>
-    </div>
+    <div class="impact-cell reveal"><div class="impact-sub">Years of Experience</div><div class="impact-num">15<span>Y</span></div><div class="impact-desc">뷰티 브랜드부터 해상관광교통 브랜드까지,<br>시장의 선택을 이끌어온 15년</div></div>
+    <div class="impact-cell reveal reveal-d1"><div class="impact-sub">Final Selection</div><div class="impact-num">NO<span>.1</span></div><div class="impact-desc">주요 디자인 개발 프로젝트 <br>최종안 채택률 압도적 1위</div></div>
+    <div class="impact-cell reveal reveal-d2"><div class="impact-sub">AI Tools in Workflow</div><div class="impact-num" style="font-size:90px;line-height:0.8;transform:translateY(-6px);">∞</div><div class="impact-desc">AI로 확장하는<br>한계 없는 비주얼 워크플로우</div></div>
+    <div class="impact-cell reveal reveal-d3"><div class="impact-sub">End-to-End System</div><div class="impact-num">100<span>%</span></div><div class="impact-desc">BI·패키지·매뉴얼 구축까지<br>완성도 높은 브랜드 시스템</div></div>
   </div>
 </div>
-
-<!-- MATCH SECTION -->
 <section class="section" id="match">
   <div class="match-header">
-    <div class="s-label reveal"><span class="s-label-num">01</span> · 지원동기</div>
-    <h2 class="match-title reveal reveal-d1">
-      트리노드가 찾는 <em>바로 그 네 가지</em>,<br>
-      저의 경험과 역량으로 증명하겠습니다.
-    </h2>
+    <div class="s-label reveal"><span class="s-label-num">01</span> · 기여방향</div>
+    <h2 class="match-title reveal reveal-d1">경험의 깊이에 효율을 더하는<br><em>디자인 워크플로우</em></h2>
   </div>
-
   <div class="match-grid" id="matchGrid">
-
-    <!-- CARD 01 -->
     <div class="match-card reveal" data-idx="1">
-      <div class="match-reel">
-        <div class="match-reel-inner">
-          <!-- 슬롯 아이템 풀: 상단에 랜덤, 맨 아래에 진짜 카드 내용 -->
-          <div class="reel-slot">
-            <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">●</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">★</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
-            <div class="slot-real">
-              <div class="match-num">01</div>
-              <div class="match-tag">실전형 AI 워크플로우</div>
-              <h3 class="match-head">AI로 확장하는<br>IP 비주얼 가속화</h3>
-              <p class="match-body">
-                단순히 툴을 쓰는 것을 넘어, <strong>10여 종의 AI를 실무 워크플로우에 이식한 경험</strong>을 트리노드의 포코 IP 세계관 확장에 쏟고 싶습니다. 15년의 디자인 안목에 AI라는 엔진을 달아, 트리노드가 지향하는 <strong>'생산성과 운영 방식의 혁신'</strong>을 실현하겠습니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="match-flash"></div>
-      <div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="match-reel"><div class="match-reel-inner"><div class="reel-slot">
+        <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">●</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">★</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
+        <div class="slot-real"><div class="match-num">01</div><h3 class="match-head">AI로 확장하는<br>비주얼 작업</h3><p class="match-body">단순히 툴을 사용하는 것을 넘어, 디자인 과정에 AI를 적절히 활용해 아이디어 탐색과 비주얼 검토의 속도를 높이겠습니다. 15년간 쌓아온 디자인 경험을 바탕으로, <strong>트리노드의 IP가 더 다양한 방식으로</strong> 표현될 수 있도록 기여하겠습니다.</p></div>
+      </div></div></div>
+      <div class="match-flash"></div><div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
-
-    <!-- CARD 02 -->
     <div class="match-card reveal reveal-d1" data-idx="2">
-      <div class="match-reel">
-        <div class="match-reel-inner">
-          <div class="reel-slot">
-            <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">★</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">●</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
-            <div class="slot-real">
-              <div class="match-num">02</div>
-              <div class="match-tag">디자인적 가치 증명</div>
-              <h3 class="match-head">비즈니스 본질을 관통하는<br>'선택받는 디자인'</h3>
-              <p class="match-body">
-                공공 프로젝트부터 국가 바우처 사업까지, 수많은 비딩과 경쟁에서 증명된 <strong>압도적 채택률</strong>을 트리노드에서도 이어가겠습니다. 감이 아닌 데이터와 논리적인 근거로 유저와 팀원을 설득하며, <strong>'실패 없는 비주얼 전략'</strong>을 제시하겠습니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="match-flash"></div>
-      <div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="match-reel"><div class="match-reel-inner"><div class="reel-slot">
+        <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">★</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">●</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
+        <div class="slot-real"><div class="match-num">02</div><h3 class="match-head">감각에 근거를 더하는<br>디자인 제안</h3><p class="match-body"><strong>브랜드와 사용자가 만나는 지점</strong>을 살피고, 왜 이런 디자인이 필요한지 <strong>설명할 수 있는 결과물</strong>을 만들겠습니다. 공공·기업·뷰티 브랜드 프로젝트를 경험하며 쌓은 설득과 조율의 방식을 팀 안에서도 안정적으로 이어가겠습니다.</p></div>
+      </div></div></div>
+      <div class="match-flash"></div><div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
-
-    <!-- CARD 03 -->
     <div class="match-card reveal reveal-d2" data-idx="3">
-      <div class="match-reel">
-        <div class="match-reel-inner">
-          <div class="reel-slot">
-            <div class="slot-dummy"><span class="dummy-icon">★</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">●</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
-            <div class="slot-real">
-              <div class="match-num">03</div>
-              <div class="match-tag">세계관 구축</div>
-              <h3 class="match-head">뾰족한 브랜드 페르소나,<br>생명력 있는 세계관 구축</h3>
-              <p class="match-body">
-                브랜딩의 핵심인 <strong>'페르소나 구축'</strong> 노하우를 포코 IP에 녹여내어, 단순한 캐릭터를 넘어 유저의 뇌리에 각인되는 견고한 세계관을 완성하겠습니다. 100여 건의 브랜드 탄생을 주도하며 쌓은 설계 능력을 바탕으로, <strong>지속 가능한 IP 브랜딩 시스템</strong>을 구축하겠습니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="match-flash"></div>
-      <div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="match-reel"><div class="match-reel-inner"><div class="reel-slot">
+        <div class="slot-dummy"><span class="dummy-icon">★</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">●</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
+        <div class="slot-real"><div class="match-num">03</div><h3 class="match-head">오래 유지되는<br>브랜드 기준 정리</h3><p class="match-body">BI, 패키지, 매뉴얼 작업을 해오며 디자인이 한 번의 결과물로 끝나지 않고 <strong>일관되게 확장되는 기준</strong>이 중요하다는 것을 배웠습니다. 트리노드의 캐릭터와 IP가 여러 접점에서 흔들림 없이 쓰일 수 있도록 돕겠습니다.</p></div>
+      </div></div></div>
+      <div class="match-flash"></div><div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
-
-    <!-- CARD 04 -->
     <div class="match-card reveal reveal-d3" data-idx="4">
-      <div class="match-reel">
-        <div class="match-reel-inner">
-          <div class="reel-slot">
-            <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">●</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">★</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
-            <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
-            <div class="slot-real">
-              <div class="match-num">04</div>
-              <div class="match-tag">함께하는 성장</div>
-              <h3 class="match-head">함께 성장하는 시니어의<br>'지식 공유'</h3>
-              <p class="match-body">
-                1인 전문가로서 검증한 AI 워크플로우를 <strong>팀의 자산으로 확장</strong>하고 싶습니다. 나를 통해 팀 전체가 함께 성장하는 변화를 즐기며, 트리노드의 <strong>디자인 인프라를 한 단계 고도화</strong>하는 데 기여하겠습니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="match-flash"></div>
-      <div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="match-reel"><div class="match-reel-inner"><div class="reel-slot">
+        <div class="slot-dummy"><span class="dummy-icon">✦</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">●</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">★</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">◆</span></div>
+        <div class="slot-dummy"><span class="dummy-icon">▲</span></div>
+        <div class="slot-real"><div class="match-num">04</div><h3 class="match-head">팀과 함께 맞춰가는<br>실무형 디자이너</h3><p class="match-body">좋은 디자인은 결과물뿐 아니라, 함께 일하는 과정에서도 명확해야 한다고 생각합니다. <strong>작업 기준과 AI 활용 방식을 팀과 공유</strong>하며, 더 효율적이고 완성도 높은 작업 흐름을 만드는 데 기여하겠습니다.</p></div>
+      </div></div></div>
+      <div class="match-flash"></div><div class="poko-confetti"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
-
-    <!-- 매칭 성공 메시지 -->
-    <div class="match-success" id="matchSuccess">
-      <span class="match-success-icon">✓</span>
-      <span class="match-success-text">PERFECT MATCH</span>
-    </div>
-
+    <div class="match-success" id="matchSuccess"><span class="match-success-icon">✓</span><span class="match-success-text">PERFECT MATCH</span></div>
   </div>
 </section>
-
-<!-- ABOUT -->
 <section class="section" id="about">
   <div class="s-label reveal"><span class="s-label-num">02</span> · 자기소개</div>
-  <h2 class="s-title reveal reveal-d1">인하우스부터 에이전시까지,<br>15년의 내공을 <em>AI로 가속화</em>하다</h2>
-
+  <h2 class="s-title reveal reveal-d1">15년의 내공을 <em>AI로 가속화</em>하다</h2>
   <div class="about-grid" style="margin-top:60px">
     <div class="about-body reveal">
-      <p>
-        <strong>인하우스·프리랜서·에이전시를 관통한 실전 감각.</strong><br>
-        화장품 브랜드 인하우스 디자이너로 시작해, 10년간 프리랜서로 BI 및 패키지 디자인의 전 과정을 책임졌습니다. 인디 브랜드의 탄생부터 40년 업력 기업의 리뉴얼까지 직접 핸들링했습니다. 이후 부산 최상위 에이전시 '돋음'의 <span class="hl">브랜드팀 차장으로서 공공 프로젝트의 핵심 디자인 실무</span>를 책임지며 대규모 비즈니스를 아우르는 전문성을 확립했습니다. 
-      </p>
-      <p>
-        <strong>설명할 수 있는 디자인, '선택받는 디자인'의 기준</strong><br>
-        인하우스 및 에이전시의 프로젝트에서, 제가 제안한 시안들이 유독 <span class="hl">높은 채택률을 기록하며 최종 선정</span>될 수 있었던 이유는 명확합니다. 단순히 시각적인 아름다움에 매몰되지 않고, 클라이언트의 <span class="hl">모호한 의도 뒤에 숨겨진 비즈니스 본질을 정확히 해석</span>했기 때문입니다. 저는 감각적인 직관을 논리적인 디자인 전략으로 치환하고, 이를 누구나 납득할 수 있는 체계적인 시스템으로 구축합니다.
-      </p>
-      <p>
-        <strong>효율에 대한 집착, AI를 만나 브랜딩의 시너지를 내다</strong><br>
-        Midjourney·Claude·Gemini 등을 적재적소에 활용하여 
-      최상의 효율을 향한 고민은 자연스럽게 생성형 AI 툴의 도입으로 이어졌습니다. Midjourney, Claude, Gemini를 적재적소에 활용하여 기획부터 비주얼 시각화, 그리고 웹 구현까지 아우르는 워크플로우를 정립했습니다. 최고의 결과물을 위해  <span class="hl"> AI를 전략적으로 핸들링하는 효율적인 프로세스</span>를 이제 트리노드의 인프라 안에서 팀의 자산으로 확장하고 싶습니다.
-      </p>
+      <p><strong>인하우스·프리랜서·에이전시를 관통한 실전 감각.</strong><br>화장품 브랜드 인하우스 디자이너로 시작해, 10년간 프리랜서로 BI 및 패키지 디자인의 전 과정을 책임졌습니다. 인디 브랜드의 탄생부터 40년 업력 기업의 리뉴얼까지 직접 핸들링했습니다. 이후 부산 최상위 에이전시 '돋음'의 <span class="hl">브랜드팀 차장으로서 공공 프로젝트의 핵심 디자인 실무</span>를 책임지며 대규모 비즈니스를 아우르는 전문성을 확립했습니다.</p>
+      <p><strong>설명할 수 있는 디자인, '선택받는 디자인'의 기준</strong><br>부산시 해상관광교통 브랜드와 공공·기업 브랜드 프로젝트를 수행하며, 여러 검토 과정 속에서도 제안한 시안이 최종안으로 선정되는 경험을 쌓아왔습니다. 단순히 보기 좋은 디자인에 머물지 않고, 프로젝트의 목적과 브랜드가 전달해야 할 방향을 함께 살폈기 때문입니다. 저는 감각에만 기대기보다, 상황에 맞는 근거를 바탕으로 설득력 있는 디자인 방향을 제안해왔습니다.</p>
+      <p><strong>효율에 대한 집착, AI를 만나 브랜딩의 시너지를 내다</strong><br>최상의 효율을 향한 고민은 자연스럽게 생성형 AI 툴의 도입으로 이어졌습니다. Midjourney, Claude, Gemini를 적재적소에 활용하여 기획부터 비주얼 시각화, 그리고 웹 구현까지 아우르는 워크플로우를 정립했습니다. 최고의 결과물을 위해 <span class="hl">AI를 전략적으로 핸들링하는 효율적인 프로세스</span>를 이제 트리노드의 인프라 안에서 팀의 자산으로 확장하고 싶습니다.</p>
     </div>
-
     <div class="career-timeline reveal reveal-d1" style="padding-left:12px;border-left:2px solid var(--green-soft)">
-      <div class="career-item">
-        <div class="career-period">2025.07 – 2026.04 · 현재</div>
-        <div class="career-title">페르수스 / 브랜드 디렉터</div>
-        <div class="career-role">DESIGN STUDIO</div>
-        <div class="career-desc">화장품 BI·패키지 디자인 전문 브랜드 운영. AI 워크플로우로 업무효율화 <br>제이웨이브 신규 화장품 BI & 패키지 6종<br>글로벌 타깃 앰플리오 BI & 패키지 2종 디자인 등</div>
-      </div>
-      <div class="career-item">
-        <div class="career-period">2023.04 – 2025.06</div>
-        <div class="career-title">돋음 / 브랜드디자인팀 차장</div>
-        <div class="career-role">Agency · Team </div>
-        <div class="career-desc">부산해상관광교통 브랜드 '부산바다위' BI 디자인 <br> '부산은 스포츠다' BI 디자인 <br>국립부산과학관 10주년 앰블럼 디자인<br>주요 프로젝트 최종안 선정. 디자인 혁신 바우처 지원 사업 등 국가 공인 브랜딩 프로젝트 수행</div>
-      </div>
-      <div class="career-item">
-        <div class="career-period">2013.01 – 2023.03</div>
-        <div class="career-title">페르수스 (프리랜서 10년)</div>
-        <div class="career-role">Specialist · Freelance</div>
-        <div class="career-desc">10년간 100여 건 이상의 BI· 화장품 패키지 디자인 프로젝트 수행.<br>홈쇼핑 연속 매진을 기록한 울트라브이 이데베논 앰플 & 크림 패키지 디자인<br>메디포스트 내친구셀디 물티슈 해당 카테고리 판매 1위 달성<br>40년 업력 기업 SHL CI 리뉴얼 브랜딩 등</div>
-      </div>
-      <div class="career-item">
-        <div class="career-period">2012.06 – 2012.12</div>
-        <div class="career-title">(주)리오엘리 / 제품기획부 · 디자이너</div>
-        <div class="career-role">In-House · Designer</div>
-        <div class="career-desc">화장품 BI 및 패키지 디자인 전담<br>
-신제품 홈쇼핑 런칭을 위한 비주얼 전략 수립 및 구현<br>
-로드숍 POP 및 잡지 광고(쎄씨, 얼루어 등) 디자인 등</div>
-      </div>
- <div class="career-item">
-        <div class="career-period">2010.08 – 2012.06</div>
-        <div class="career-title">㈜리스앙쥬/ 해외사업부 · 디자이너</div>
-        <div class="career-role">In-House · Designer</div>
-        <div class="career-desc">글로벌 마켓 타겟 화장품 패키지 및 BI 디자인 전담<br>
-본사 쇼룸 VMD 설계 및 해외 박람회(홍콩 코스모프로프) 패널 디자인 등</div>
-      </div>
+      <div class="career-item"><div class="career-period">2025.07 – 2026.04 · 현재</div><div class="career-title">페르수스 / 브랜드 디렉터</div><div class="career-role">DESIGN STUDIO</div><div class="career-desc">화장품 BI·패키지 디자인 전문 브랜드 운영. AI 워크플로우로 업무효율화<br>제이웨이브 신규 화장품 BI & 패키지 6종<br>글로벌 타깃 앰플리오 BI & 패키지 2종 디자인 등</div></div>
+      <div class="career-item"><div class="career-period">2023.04 – 2025.06</div><div class="career-title">돋음 / 브랜드디자인팀 차장</div><div class="career-role">Agency · Team</div><div class="career-desc">부산해상관광교통 브랜드 '부산바다위' BI 디자인<br>'부산은 스포츠다' BI 디자인<br>국립부산과학관 10주년 앰블럼 디자인<br>주요 프로젝트 최종안 선정. 디자인 혁신 바우처 지원 사업 등 국가 공인 브랜딩 프로젝트 수행</div></div>
+      <div class="career-item"><div class="career-period">2013.01 – 2023.03</div><div class="career-title">페르수스 (프리랜서 10년)</div><div class="career-role">Specialist · Freelance</div><div class="career-desc">10년간 100여 건 이상의 BI· 화장품 패키지 디자인 프로젝트 수행.<br>홈쇼핑 연속 매진을 기록한 울트라브이 이데베논 앰플 & 크림 패키지 디자인<br>메디포스트 내친구셀디 물티슈 해당 카테고리 판매 1위 달성<br>40년 업력 기업 SHL CI 리뉴얼 브랜딩 등</div></div>
+      <div class="career-item"><div class="career-period">2012.06 – 2012.12</div><div class="career-title">(주)리오엘리 / 제품기획부 · 디자이너</div><div class="career-role">In-House · Designer</div><div class="career-desc">화장품 BI 및 패키지 디자인 전담<br>신제품 홈쇼핑 런칭을 위한 비주얼 전략 수립 및 구현<br>로드숍 POP 및 잡지 광고(쎄씨, 얼루어 등) 디자인 등</div></div>
+      <div class="career-item"><div class="career-period">2010.08 – 2012.06</div><div class="career-title">㈜리스앙쥬/ 해외사업부 · 디자이너</div><div class="career-role">In-House · Designer</div><div class="career-desc">글로벌 마켓 타겟 화장품 패키지 및 BI 디자인 전담<br>본사 쇼룸 VMD 설계 및 해외 박람회(홍콩 코스모프로프) 패널 디자인 등</div></div>
     </div>
   </div>
 </section>
-
-<!-- PROJECTS -->
 <section class="section" id="projects" style="background:var(--bg-alt)">
   <div class="s-label reveal"><span class="s-label-num">03</span> · 대표 프로젝트</div>
-  <h2 class="s-title reveal reveal-d1">검증된 <em>결과물들</em></h2> 
+  <h2 class="s-title reveal reveal-d1">검증된 <em>결과물들</em></h2>
   <div class="proj-grid">
-    <div class="proj-card reveal">
-      <div class="proj-image">
-        <img src="images/project-01.jpg" alt="부산바다위 BI 디자인" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="proj-content">
-        <div class="proj-meta">
-          <span class="proj-num">01</span>
-          <span class="proj-year">2024</span>
-        </div>
-        <h3 class="proj-title">부산해상관광교통 브랜드<br>'부산바다위' BI 디자인 개발</h3>
-        <div class="proj-role">Main Brand Designer @ 돋음</div>
-        <p class="proj-desc">
-          디자인진흥원 경쟁 입찰 수주 이후 1년여에 걸친 개발 과정에서 실무 디자인 전반을 담당. 
-          사내외 검토·전문가 자문·대국민 투표로 이어지는 <strong>다단계 의사결정을 통과해 최종 공식안으로 선정</strong>. 
-          100페이지 분량의 상세 브랜드 가이드라인을 완수하여 부산시 대표 해양 모빌리티 브랜드의 시각 체계를 구축했습니다.
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">Brand Identity</span>
-          <span class="proj-tag">Guideline Manual</span>
-          <span class="proj-tag">Public Bidding</span>
-          <span class="proj-tag">Final Selection</span>
-        </div>
-      </div>
-    </div>
- 
-    <div class="proj-card reveal">
-      <div class="proj-image">
-        <img src="images/project-02.jpg" alt="부산은 스포츠다 BI" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="proj-content">
-        <div class="proj-meta">
-          <span class="proj-num">02</span>
-          <span class="proj-year">2025</span>
-        </div>
-        <h3 class="proj-title">부산시 생활체육 슬로건<br>'부산은 스포츠다' BI 디자인 개발</h3>
-        <div class="proj-role">Main Brand Designer @ 돋음</div>
-        <p class="proj-desc">
-          부산시 생활체육 슬로건의 브랜드 아이덴티티 시스템을 구축했습니다. 팀 내부에서 도출된 다수의 안 중 본인의 디자인이 최종 채택되었으며, 이후 고도화 과정을 거쳐 브랜드의 시각적 기틀을 완성했습니다. 기본 <strong>가이드라인 수립을 비롯해 현수막, 어패럴(모자·의류) 등 핵심 접점의 어플리케이션 시스템</strong>을 설계하여 <strong>일관된 브랜드 경험</strong>을 구현했습니다.
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">Brand Identity</span>
-          <span class="proj-tag">Application System</span>
-          <span class="proj-tag">Busan City</span>
-        </div>
-      </div>
-    </div>
- 
-    <div class="proj-card reveal">
-      <div class="proj-image">
-        <img src="images/project-03.jpg" alt="국립부산과학관 10주년 앰블럼" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="proj-content">
-        <div class="proj-meta">
-          <span class="proj-num">03</span>
-          <span class="proj-year">2024</span>
-        </div>
-        <h3 class="proj-title">국립부산과학관 10주년<br>기념 앰블럼 디자인 개발</h3>
-        <div class="proj-role">Main Brand Designer @ 돋음</div>
-        <p class="proj-desc">
-         기관의 상징적인 <strong>건축물 외형을 모티프로 활용하여 공간적 정체성을 직관적으로 투영</strong>하고, 이를 파티모자 형상의 조형 언어로 재해석하여 <strong>10주년의 기념성과 축제의 에너지</strong>를 동시에 담아냈습니다. 이를 중심으로 한 시그니처 시스템 수립 및 가이드 매뉴얼 제작을 완수하여 온·오프라인 전 접점에서 일관된 브랜드 경험이 전달되도록 했습니다.
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">Emblem Design</span>
-          <span class="proj-tag">Anniversary BI</span>
-          <span class="proj-tag">National Institution</span>
-        </div>
-      </div>
-    </div>
- 
-    <div class="proj-card reveal">
-      <div class="proj-image">
-        <img src="images/project-04.jpg" alt="데콜라주 워터 겔 패키지" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="proj-content">
-        <div class="proj-meta">
-          <span class="proj-num">04</span>
-          <span class="proj-year">2022</span>
-        </div>
-        <h3 class="proj-title">데콜라주 하이드라이팅<br>워터 겔 패키지 디자인</h3>
-        <div class="proj-role">Lead Designer @ 페르수스</div>
-        <p class="proj-desc">
-          <strong>기내 창밖의 정경과 휴식의 감성을 조형적으로 시각화한 프리미엄 패키지 디자인</strong> 입니다. 와인 보틀의 우아한 실루엣을 용기 디자인에 차용하여 여행의 설렘과 여유를 직관적으로 전달하고자 했으며, 화이트와 네이비 블루의 투톤 구조를 통해 브랜드 특유의 청량함과 안정감을 조화롭게 구현했습니다. 
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">Package Design</span>
-          <span class="proj-tag">Cosmetic Brand</span>
-          <span class="proj-tag">Premium</span>
-        </div>
-      </div>
-    </div>
- 
-    <div class="proj-card reveal">
-      <div class="proj-image">
-        <img src="images/project-05.jpg" alt="AI 기반 1인 브랜드 스튜디오" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="proj-content">
-        <div class="proj-meta">
-          <span class="proj-num">05</span>
-          <span class="proj-year">2025~</span>
-        </div>
-        <h3 class="proj-title">AI 기반 1인 브랜드<br>디자인 스튜디오 운영</h3>
-        <div class="proj-role">Founder & Lead Designer @ 페르수스</div>
-        <p class="proj-desc">
-         <strong>AI 기술을 디자인 프로세스에 적극적으로 도입</strong>하여 더 감각적이고 효율적인 결과물을 만드는 1인 브랜드 스튜디오, 페르수스(PERSUS)를 운영하고 있습니다. Midjourney를 활용한 비주얼 컨셉 도출부터 Photoshop/Illustrator를 연동한 고밀도 후작업 워크플로우를 구축했으며, Claude와 jemini 등을 활용해 반응형 웹페이지 및 비즈니스 프레임워크를 직접 설계·배포했습니다. 리서치, 디자인, 영상 제작 등 브랜딩 <strong>전 과정에 AI 솔루션을 전방위적으로 활용</strong>합니다. 본 웹 이력서 또한 AI와의 긴밀한 협업을 통해 제작된 결과물입니다.
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">AI Workflow</span>
-          <span class="proj-tag">Web Development</span>
-          <span class="proj-tag">Studio Founder</span>
-          <span class="proj-tag">Ongoing</span>
-        </div>
-      </div>
-    </div>
+    <div class="proj-card reveal"><div class="proj-image"><img src="images/project-01.jpg" alt="부산바다위 BI 디자인" style="width:100%;height:100%;object-fit:cover;"></div><div class="proj-content"><div class="proj-meta"><span class="proj-num">01</span><span class="proj-year">2024</span></div><h3 class="proj-title">부산해상관광교통 브랜드<br>'부산바다위' BI 디자인 개발</h3><div class="proj-role">Main Brand Designer @ 돋음</div><p class="proj-desc">디자인진흥원 경쟁 입찰 수주 이후 1년여에 걸친 개발 과정에서 실무 디자인 전반을 담당. 사내외 검토·전문가 자문·대국민 투표로 이어지는 <strong>다단계 의사결정을 통과해 최종 공식안으로 선정</strong>. 100페이지 분량의 상세 브랜드 가이드라인을 완수하여 부산시 대표 해양 모빌리티 브랜드의 시각 체계를 구축했습니다.</p><div class="proj-tags"><span class="proj-tag">Brand Identity</span><span class="proj-tag">Guideline Manual</span><span class="proj-tag">Public Bidding</span><span class="proj-tag">Final Selection</span></div></div></div>
+    <div class="proj-card reveal"><div class="proj-image"><img src="images/project-02.jpg" alt="부산은 스포츠다 BI" style="width:100%;height:100%;object-fit:cover;"></div><div class="proj-content"><div class="proj-meta"><span class="proj-num">02</span><span class="proj-year">2025</span></div><h3 class="proj-title">부산시 생활체육 슬로건<br>'부산은 스포츠다' BI 디자인 개발</h3><div class="proj-role">Main Brand Designer @ 돋음</div><p class="proj-desc">부산시 생활체육 슬로건의 브랜드 아이덴티티 시스템을 구축했습니다. 팀 내부에서 도출된 다수의 안 중 본인의 디자인이 최종 채택되었으며, 이후 고도화 과정을 거쳐 브랜드의 시각적 기틀을 완성했습니다. 기본 <strong>가이드라인 수립을 비롯해 현수막, 어패럴(모자·의류) 등 핵심 접점의 어플리케이션 시스템</strong>을 설계하여 <strong>일관된 브랜드 경험</strong>을 구현했습니다.</p><div class="proj-tags"><span class="proj-tag">Brand Identity</span><span class="proj-tag">Application System</span><span class="proj-tag">Busan City</span></div></div></div>
+    <div class="proj-card reveal"><div class="proj-image"><img src="images/project-03.jpg" alt="국립부산과학관 10주년 앰블럼" style="width:100%;height:100%;object-fit:cover;"></div><div class="proj-content"><div class="proj-meta"><span class="proj-num">03</span><span class="proj-year">2024</span></div><h3 class="proj-title">국립부산과학관 10주년<br>기념 앰블럼 디자인 개발</h3><div class="proj-role">Main Brand Designer @ 돋음</div><p class="proj-desc">기관의 상징적인 <strong>건축물 외형을 모티프로 활용하여 공간적 정체성을 직관적으로 투영</strong>하고, 이를 파티모자 형상의 조형 언어로 재해석하여 <strong>10주년의 기념성과 축제의 에너지</strong>를 동시에 담아냈습니다. 이를 중심으로 한 시그니처 시스템 수립 및 가이드 매뉴얼 제작을 완수하여 온·오프라인 전 접점에서 일관된 브랜드 경험이 전달되도록 했습니다.</p><div class="proj-tags"><span class="proj-tag">Emblem Design</span><span class="proj-tag">Anniversary BI</span><span class="proj-tag">National Institution</span></div></div></div>
+    <div class="proj-card reveal"><div class="proj-image"><img src="images/project-04.jpg" alt="데콜라주 워터 겔 패키지" style="width:100%;height:100%;object-fit:cover;"></div><div class="proj-content"><div class="proj-meta"><span class="proj-num">04</span><span class="proj-year">2022</span></div><h3 class="proj-title">데콜라주 하이드라이팅<br>워터 겔 패키지 디자인</h3><div class="proj-role">Lead Designer @ 페르수스</div><p class="proj-desc"><strong>기내 창밖의 정경과 휴식의 감성을 조형적으로 시각화한 프리미엄 패키지 디자인</strong>입니다. 와인 보틀의 우아한 실루엣을 용기 디자인에 차용하여 여행의 설렘과 여유를 직관적으로 전달하고자 했으며, 화이트와 네이비 블루의 투톤 구조를 통해 브랜드 특유의 청량함과 안정감을 조화롭게 구현했습니다.</p><div class="proj-tags"><span class="proj-tag">Package Design</span><span class="proj-tag">Cosmetic Brand</span><span class="proj-tag">Premium</span></div></div></div>
+    <div class="proj-card reveal"><div class="proj-image"><img src="images/project-05.jpg" alt="AI 기반 1인 브랜드 스튜디오" style="width:100%;height:100%;object-fit:cover;"></div><div class="proj-content"><div class="proj-meta"><span class="proj-num">05</span><span class="proj-year">2025~</span></div><h3 class="proj-title">화장품 BI·패키지 디자인 전문<br>1인 브랜드 스튜디오 운영</h3><div class="proj-role">Founder & Lead Designer @ 페르수스</div><p class="proj-desc">페르수스는 <strong>화장품 BI와 패키지 디자인을 전문</strong>으로 하는 브랜드 디자인 스튜디오입니다. 브랜드의 포지셔닝과 방향성을 정리하고, 로고·용기·단상자 패키지까지 <strong>일관된 시각 체계로 설계하는 작업</strong>을 중심으로 운영하고 있습니다. 디자인 시안 작업과 완성도는 AI에 의존하지 않고 직접 책임집니다. AI는 디자인을 대체하는 수단이 아니라, 스튜디오 운영과 실무 효율을 높이는 보조 도구로 활용하고 있습니다. 웹페이지 구성, 메일 응대 문구, 견적서·의뢰서 폼 설계, 브랜드 방향성 정리, 레퍼런스 탐색, 목업 이미지 생성 등 실무 과정에 AI를 적용해 1인 체제에서도 체계적이고 지속 가능한 워크플로우를 구축했습니다.</p><div class="proj-tags"><span class="proj-tag">AI Workflow</span><span class="proj-tag">Web Development</span><span class="proj-tag">Studio Founder</span><span class="proj-tag">Ongoing</span></div></div></div>
   </div>
 </section>
-
-<!-- AI WORKFLOW -->
 <section class="section ai-section" id="ai">
-  <div class="ai-header">
-    <div>
-      <div class="s-label reveal"><span class="s-label-num">04</span> · AI 워크플로우</div>
-  </div>  </div>
-
-
+  <div class="ai-header"><div><div class="s-label reveal"><span class="s-label-num">04</span> · AI 워크플로우</div></div></div>
   <div class="ai-workflow-grid">
-    <div class="ai-block reveal">
-      <div class="ai-block-num">WORKFLOW · 01</div>
-      <h3 class="ai-block-title">컨셉 아트 & 이미지 리소스 제작</h3>
-      <div class="ai-block-desc">
-        <strong>Midjourney로 컨셉 비주얼을 빠르게 도출</strong>하고, Photoshop·Illustrator로 디테일을 정제하여 실제 브랜드 자산으로 활용합니다. 
-        채용 공고의 '생성형 AI를 활용한 컨셉 아트 및 이미지 리소스 제작' 요구사항과 정확히 일치하는 실무 경험.
-      </div>
-    </div>
-    <div class="ai-block reveal reveal-d1">
-      <div class="ai-block-num">WORKFLOW · 02</div>
-      <h3 class="ai-block-title">반응형 웹 & 서류 폼 직접 구축</h3>
-      <div class="ai-block-desc">
-        <strong>Claude·ChatGPT·Gemini를 목적에 따라 구분 사용</strong>합니다. 
-        반응형 웹 페이지, 견적 서류 폼, 랜딩 페이지를 직접 코딩·배포해 운영 중. 
-        이 이력서도 동일 방식으로 제작되었습니다.
-      </div>
-    </div>
-    <div class="ai-block reveal reveal-d2">
-      <div class="ai-block-num">WORKFLOW · 03</div>
-      <h3 class="ai-block-title">프롬프트 엔지니어링 · 역할 분담</h3>
-      <div class="ai-block-desc">
-        단순히 툴을 '쓰는 것'이 아니라, <strong>어떤 작업에 AI를 투입할 때 효율이 극대화되는지</strong> 실전으로 체득. 
-        AI와 역할을 명확히 분담하여 최종 결과물의 품질을 관리하는 방법을 사용하고 있습니다.
-      </div>
-    </div>
-    <div class="ai-block reveal reveal-d3">
-      <div class="ai-block-num">WORKFLOW · 04</div>
-      <h3 class="ai-block-title">리서치 · 트렌드 선행 · 인사이트 도출</h3>
-      <div class="ai-block-desc">
-        GPT로 최신 <strong>브랜딩 트렌드를 모니터링</strong>하며 업계 흐름을 놓치지 않습니다. NotebookLM을 활용해 방대한 자료 속에서 프로젝트에 필요한 <strong>핵심 정보</strong>를 빠르게 찾아냅니다.
-      </div>
-    </div>
+    <div class="ai-block reveal"><div class="ai-block-num">WORKFLOW · 01</div><h3 class="ai-block-title">컨셉 아트 & 이미지 리소스 제작</h3><div class="ai-block-desc"><strong>GPT, Midjourney로 컨셉 비주얼을 빠르게 도출</strong>하고, Photoshop·Illustrator로 디테일을 정제하여 실제 브랜드 자산으로 활용합니다.</div></div>
+    <div class="ai-block reveal reveal-d1"><div class="ai-block-num">WORKFLOW · 02</div><h3 class="ai-block-title">반응형 웹 & 서류 폼 직접 구축</h3><div class="ai-block-desc"><strong>Claude·ChatGPT·Gemini를 목적에 따라 구분 사용</strong>합니다. 반응형 웹 페이지, 견적 서류 폼, 랜딩 페이지를 직접 코딩·배포해 운영 중. 이 이력서도 동일 방식으로 제작되었습니다.</div></div>
+    <div class="ai-block reveal reveal-d2"><div class="ai-block-num">WORKFLOW · 03</div><h3 class="ai-block-title">역할 분담</h3><div class="ai-block-desc">단순히 툴을 '쓰는 것'이 아니라, <strong>어떤 작업에 AI를 투입할 때 효율이 극대화되는지</strong> 실전으로 체득. AI와 역할을 명확히 분담하여 최종 결과물의 품질을 관리하는 방법을 사용하고 있습니다.</div></div>
+    <div class="ai-block reveal reveal-d3"><div class="ai-block-num">WORKFLOW · 04</div><h3 class="ai-block-title">리서치 · 트렌드 선행 · 인사이트 도출</h3><div class="ai-block-desc">GPT로 최신 <strong>브랜딩 트렌드를 모니터링</strong>하며 업계 흐름을 놓치지 않습니다. NotebookLM을 활용해 방대한 자료 속에서 프로젝트에 필요한 <strong>핵심 정보</strong>를 빠르게 찾아냅니다.</div></div>
   </div>
-
-
 </section>
-
-
-<!-- EDU + PROFILE -->
 <section class="section" id="profile" style="background:var(--bg-alt)">
-  <div class="s-label reveal"><span class="s-label-num">05</span> · 요약정보</div>
+  <div class="s-label reveal"><span class="s-label-num">05</span> · 프로필요약</div>
   <h2 class="s-title reveal reveal-d1">배경과 역량의 <em>토대</em></h2>
-
   <div class="edu-grid" style="margin-top:40px">
     <div class="edu-card reveal">
       <span class="edu-badge">Education</span>
-      <div class="edu-title">부경대학교</div>
-      <div class="edu-period">2005.03 – 2010.08 · 졸업</div>
-      <div class="edu-detail">
-        <span>전공 · 산업디자인과</span>
-        <span>학점 · 3.32 / 4.5</span>
-      </div>
-      <div style="margin-top:28px">
-        <span class="edu-badge" style="margin-bottom:14px">Design Skills</span>
-        <div class="skill-tags">
-          <span class="skill-tag">Photoshop</span>
-          <span class="skill-tag">Illustrator</span>
-        </div>
-      </div>
-      <div style="margin-top:20px">
-        <span class="edu-badge" style="margin-bottom:14px">AI Tools</span>
-        <div class="skill-tags">
-          <span class="skill-tag">Claude</span>
-          <span class="skill-tag">ChatGPT</span>
-          <span class="skill-tag">Midjourney</span>
-          <span class="skill-tag">Gemini</span>
-          <span class="skill-tag">NotebookLM</span>
-          <span class="skill-tag">Perplexity</span>
-        </div>
-      </div>
+      <div class="edu-title">부경대학교</div><div class="edu-period">2005.03 – 2010.08 · 졸업</div>
+      <div class="edu-detail"><span>전공 · 산업디자인과</span><span>학점 · 3.32 / 4.5</span></div>
+      <div style="margin-top:28px"><span class="edu-badge" style="margin-bottom:14px">Design Skills</span><div class="skill-tags"><span class="skill-tag">Photoshop</span><span class="skill-tag">Illustrator</span></div></div>
+      <div style="margin-top:20px"><span class="edu-badge" style="margin-bottom:14px">AI Tools</span><div class="skill-tags"><span class="skill-tag">Claude</span><span class="skill-tag">ChatGPT</span><span class="skill-tag">Midjourney</span><span class="skill-tag">Gemini</span><span class="skill-tag">NotebookLM</span><span class="skill-tag">Perplexity</span></div></div>
     </div>
-
     <div class="edu-card reveal reveal-d1">
       <span class="edu-badge">Awards · Certification</span>
-      <div class="edu-sub-item">
-        <div class="edu-sub-label">수상 · 2008.10</div>
-        <div class="edu-title" style="font-size:0.98rem">2008 부산국제건축문화제 실내건축대전</div>
-        <div class="edu-detail">사단법인 한국실내건축가협회 부산·경남지회</div>
-      </div>
-      <div class="edu-sub-item">
-        <div class="edu-sub-label">자격 · 2005.04</div>
-        <div class="edu-title" style="font-size:0.98rem">정보기술자격(ITQ) 아래한글</div>
-        <div class="edu-detail">한국생산성본부 · 최종합격</div>
-      </div>
-      <div class="edu-sub-item">
-        <div class="edu-sub-label">자격 · 2013.08</div>
-        <div class="edu-title" style="font-size:0.98rem">2종보통 운전면허</div>
-        <div class="edu-detail">경찰청 · 최종합격</div>
-      </div>
-      <div class="edu-sub-item">
-        <div class="edu-sub-label">사회활동 · 2014.01</div>
-        <div class="edu-title" style="font-size:0.98rem">두드림 국토대장정</div>
-        <div class="edu-detail">제주도 해안도로 일주 국토대장정</div>
-      </div>
+      <div class="edu-sub-item"><div class="edu-sub-label">수상 · 2008.10</div><div class="edu-title" style="font-size:0.98rem">2008 부산국제건축문화제 실내건축대전</div><div class="edu-detail">사단법인 한국실내건축가협회 부산·경남지회</div></div>
+      <div class="edu-sub-item"><div class="edu-sub-label">자격 · 2005.04</div><div class="edu-title" style="font-size:0.98rem">정보기술자격(ITQ) 아래한글</div><div class="edu-detail">한국생산성본부 · 최종합격</div></div>
+      <div class="edu-sub-item"><div class="edu-sub-label">자격 · 2013.08</div><div class="edu-title" style="font-size:0.98rem">2종보통 운전면허</div><div class="edu-detail">경찰청 · 최종합격</div></div>
+      <div class="edu-sub-item"><div class="edu-sub-label">사회활동 · 2014.01</div><div class="edu-title" style="font-size:0.98rem">두드림 국토대장정</div><div class="edu-detail">제주도 해안도로 일주 국토대장정</div></div>
     </div>
-
     <div class="edu-card reveal reveal-d2">
       <span class="edu-badge">Profile Summary</span>
       <div class="profile-info" style="margin-top:20px">
@@ -1750,194 +418,60 @@ button{cursor:none;background:none;border:none;color:inherit;font-family:inherit
     </div>
   </div>
 </section>
-
-<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-bg"></div>
   <div class="contact-inner">
-    <div class="contact-label">
-      <span>06 · 컨택</span>
-    </div>
-    <h2 class="contact-title reveal">
-      트리노드의 다음 챕터,<br>
-      <em>제가 함께 쓰겠습니다.</em>
-    </h2>
-
+    <div class="contact-label"><span>06 · 컨택</span></div>
+    <h2 class="contact-title reveal">트리노드의 다음 챕터,<br><em>제가 함께 쓰겠습니다.</em></h2>
     <div class="contact-grid">
-      <div class="contact-card">
-        <div class="cc-label">Phone</div>
-        <div class="cc-value">010-9186-9820</div>
-      </div>
-      <div class="contact-card">
-        <div class="cc-label">Email</div>
-        <div class="cc-value" style="font-size:0.92rem">angcho24@naver.com</div>
-      </div>
-      <div class="contact-card">
-        <div class="cc-label">Location</div>
-        <div class="cc-value">부산 수영구 호암로</div>
-        <div class="cc-sub">트리노드 사무실 근거리</div>
-      </div>
-      <div class="contact-card">
-        <div class="cc-label">Position</div>
-        <div class="cc-value">AI Designer</div>
-        <div class="cc-sub">UIUX셀 · 포코머지팀</div>
-      </div>
+      <div class="contact-card"><div class="cc-label">Phone</div><div class="cc-value"><a href="tel:01091869820" style="color:inherit;text-decoration:none;">010-9186-9820</a></div></div>
+      <div class="contact-card"><div class="cc-label">Email</div><div class="cc-value" style="font-size:0.92rem">angcho24@naver.com</div></div>
+      <div class="contact-card"><div class="cc-label">Location</div><div class="cc-value">부산 수영구 호암로</div><div class="cc-sub">트리노드 사무실 근거리</div></div>
+      <div class="contact-card"><div class="cc-label">Position</div><div class="cc-value">AI Designer</div><div class="cc-sub">UIUX셀 · 포코머지팀</div></div>
     </div>
-
     <div class="contact-footer">
       <div class="contact-copy">배수현 · 트리노드 UIUX셀 AI 디자이너 지원 · 2026. 04 · Built with Claude</div>
       <div class="contact-end">— 경력기술서 별첨 · END —</div>
     </div>
   </div>
 </section>
-
-<!-- FAB -->
 <div class="fab-group">
   <button class="fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
   <a href="#" class="fab" onclick="alert('이력서 PDF 파일은 별도 첨부로 제공됩니다.');return false;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
     이력서 PDF
   </a>
   <a href="#" class="fab" onclick="alert('경력기술서 PDF 파일은 별도 첨부로 제공됩니다.');return false;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
     경력기술서 PDF
   </a>
 </div>
-
-<!-- CLAUDE BANNER -->
 <div class="claude-banner">
   <div class="claude-banner-icon">AI</div>
   <div>이 웹 이력서는 <strong>Claude (Anthropic)</strong>와의 협업으로 제작되었습니다 · 기획부터 코딩, 배포까지 AI 워크플로우로 완성한 결과물입니다</div>
 </div>
-
 <script>
-function toggleTheme(){
-  const root=document.documentElement;
-  const cur=root.getAttribute('data-theme');
-  const next=cur==='light'?'dark':'light';
-  root.setAttribute('data-theme',next);
-  localStorage.setItem('theme',next);
-}
-(function(){
-  const saved=localStorage.getItem('theme');
-  if(saved)document.documentElement.setAttribute('data-theme',saved);
-})();
-
-const rabbit=document.getElementById('rabbit');
-const dot=document.getElementById('dot');
-let tx=0,ty=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  tx=e.clientX;ty=e.clientY;
-  dot.style.left=tx+'px';dot.style.top=ty+'px';
-});
-function animate(){
-  rx+=(tx-rx)*0.15;ry+=(ty-ry)*0.15;
-  rabbit.style.left=rx+'px';rabbit.style.top=ry+'px';
-  requestAnimationFrame(animate);
-}
+function toggleTheme(){const root=document.documentElement;const cur=root.getAttribute('data-theme');const next=cur==='light'?'dark':'light';root.setAttribute('data-theme',next);localStorage.setItem('theme',next)}
+(function(){const saved=localStorage.getItem('theme');if(saved)document.documentElement.setAttribute('data-theme',saved)})();
+const rabbit=document.getElementById('rabbit');const dot=document.getElementById('dot');let tx=0,ty=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;dot.style.left=tx+'px';dot.style.top=ty+'px'});
+function animate(){rx+=(tx-rx)*0.15;ry+=(ty-ry)*0.15;rabbit.style.left=rx+'px';rabbit.style.top=ry+'px';requestAnimationFrame(animate)}
 animate();
-
-document.querySelectorAll('a, button, .match-card, .proj-card, .ai-block, .impact-cell').forEach(el=>{
-  el.addEventListener('mouseenter',()=>rabbit.classList.add('hover'));
-  el.addEventListener('mouseleave',()=>rabbit.classList.remove('hover'));
-});
-
-document.addEventListener('click',e=>{
-  if(e.target.closest('button, a'))return;
-  const burst=document.createElement('div');
-  burst.className='click-burst';
-  burst.style.left=e.clientX+'px';burst.style.top=e.clientY+'px';
-  for(let i=0;i<6;i++){
-    const s=document.createElement('span');
-    burst.appendChild(s);
-  }
-  document.body.appendChild(burst);
-  setTimeout(()=>burst.remove(),700);
-});
-
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
-},{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('a, button, .match-card, .proj-card, .ai-block, .impact-cell').forEach(el=>{el.addEventListener('mouseenter',()=>rabbit.classList.add('hover'));el.addEventListener('mouseleave',()=>rabbit.classList.remove('hover'))});
+document.addEventListener('click',e=>{if(e.target.closest('button, a'))return;const burst=document.createElement('div');burst.className='click-burst';burst.style.left=e.clientX+'px';burst.style.top=e.clientY+'px';for(let i=0;i<6;i++){const s=document.createElement('span');burst.appendChild(s)}document.body.appendChild(burst);setTimeout(()=>burst.remove(),700)});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
 const fabTop=document.getElementById('fabTop');
-window.addEventListener('scroll',()=>{
-  fabTop.classList.toggle('visible',window.scrollY>500);
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const href=a.getAttribute('href');
-    if(href==='#')return;
-    e.preventDefault();
-    const t=document.querySelector(href);
-    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-});
-
-/* ===== SLOT MACHINE (MATCH SECTION) ===== */
+window.addEventListener('scroll',()=>{fabTop.classList.toggle('visible',window.scrollY>500)});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const href=a.getAttribute('href');if(href==='#')return;e.preventDefault();const t=document.querySelector(href);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 (function(){
-  const grid=document.getElementById('matchGrid');
-  if(!grid)return;
-
-  let isPlaying=false;
-  let timers=[];
-
-  function resetSlot(){
-    // 모든 타이머 클리어
-    timers.forEach(t=>clearTimeout(t));
-    timers=[];
-    isPlaying=false;
-    // 클래스 전부 제거 → 초기(카드 내용 보이는) 상태로
-    grid.classList.remove('spinning','matched',
-      'landed-1','landed-2','landed-3','landed-4');
-  }
-
-  function playSlotMachine(){
-    if(isPlaying)return;
-    isPlaying=true;
-
-    // Phase 1: 스핀 시작
-    grid.classList.add('spinning');
-
-    // Phase 2: 순차 정지 (0.7s 간격)
-    const stopDelays=[700,1400,2100,2800];
-    stopDelays.forEach((delay,i)=>{
-      const t=setTimeout(()=>{
-        grid.classList.add('landed-'+(i+1));
-        if(i===3){
-          const t2=setTimeout(()=>{
-            grid.classList.remove('spinning');
-            grid.classList.add('matched');
-            const t3=setTimeout(()=>{
-              grid.classList.remove('matched');
-              isPlaying=false;
-            },2200);
-            timers.push(t3);
-          },100);
-          timers.push(t2);
-        }
-      },delay);
-      timers.push(t);
-    });
-  }
-
-  const slotObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting && e.intersectionRatio>=0.35){
-        playSlotMachine();
-      } else if(!e.isIntersecting){
-        // 섹션이 완전히 벗어나면 리셋
-        resetSlot();
-      }
-    });
-  },{threshold:[0,0.35]});
+  const grid=document.getElementById('matchGrid');if(!grid)return;
+  let isPlaying=false;let timers=[];
+  function resetSlot(){timers.forEach(t=>clearTimeout(t));timers=[];isPlaying=false;grid.classList.remove('spinning','matched','landed-1','landed-2','landed-3','landed-4')}
+  function playSlotMachine(){if(isPlaying)return;isPlaying=true;grid.classList.add('spinning');const stopDelays=[700,1400,2100,2800];stopDelays.forEach((delay,i)=>{const t=setTimeout(()=>{grid.classList.add('landed-'+(i+1));if(i===3){const t2=setTimeout(()=>{grid.classList.remove('spinning');grid.classList.add('matched');const t3=setTimeout(()=>{grid.classList.remove('matched');isPlaying=false},2200);timers.push(t3)},100);timers.push(t2)}},delay);timers.push(t)})}
+  const slotObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting && e.intersectionRatio>=0.35){playSlotMachine()}else if(!e.isIntersecting){resetSlot()}})},{threshold:[0,0.35]});
   slotObs.observe(grid);
 })();
 </script>
